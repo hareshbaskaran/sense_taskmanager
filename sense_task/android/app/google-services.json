@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "378019980654",
+    "project_id": "sense-task-management",
+    "storage_bucket": "sense-task-management.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:378019980654:android:0aed817dd078e62b3f0d7f",
+        "android_client_info": {
+          "package_name": "com.example.sense_task"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "378019980654-9rqn3pm2chrr2fgoum0fd1rpc6ovvccc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDuw29DKtIS_FD8_KSemrCJ3krSim-2VEg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "378019980654-9rqn3pm2chrr2fgoum0fd1rpc6ovvccc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
