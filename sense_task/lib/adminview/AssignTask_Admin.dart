@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sense_task/Services/firebase_crud.dart';
 import 'package:sense_task/adminview/adminpage.dart';
@@ -11,7 +10,7 @@ import '../LoginPage.dart';
 TextEditingController taskcategorycontroller = new TextEditingController();
 
 TextEditingController tasktitlecontroller = new TextEditingController();
-TextEditingController adminreasoncontroller = new TextEditingController();
+
 TextEditingController taskdescriptioncontroller = new TextEditingController();
 
 var checkInserttask = "Assign";
@@ -65,457 +64,470 @@ class _taskassign_aState extends State<taskassign_a> {
         ModalRoute.of(context)!.settings.arguments as QueryDocumentSnapshot?;
 
     return Container(
-      decoration: const BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage(
-                'assets/images/Group 12.png',
-              ),
-              fit: BoxFit.cover)),
-      child: SafeArea(
-        child: Scaffold(
-            backgroundColor: Colors.transparent,
-            resizeToAvoidBottomInset: false,
-            body: RefreshIndicator(
-              color: Colors.black,
-              onRefresh: () async {
-                await Future.delayed(Duration(seconds: 1));
-                setState(() {
-                  ct += 1;
-                });
-              },
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(top: 10),
-                        child: Row(
-                          children: [
-                            BackButton(
-                              onPressed: () {
-                                Navigator.pop(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => adminpage()),
-                                );
-                                _clearassignpage();
-                              },
-                            ),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.16,
-                            ),
-                            Text(
-                              "${checkInserttask}" + ' Task',
-                              style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                  fontSize:
-                                  MediaQuery.of(context).size.width * 0.06),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.01),
-                      Row(
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage(
+                  'assets/images/Group 12.png',
+                ),
+                fit: BoxFit.cover)),
+        child: SafeArea(
+            child: Scaffold(
+                backgroundColor: Colors.transparent,
+                resizeToAvoidBottomInset: false,
+                body: RefreshIndicator(
+                  color: Colors.black,
+                  onRefresh: () async {
+                    await Future.delayed(Duration(seconds: 1));
+                    setState(() {
+                      ct += 1;
+                    });
+                  },
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
                         children: [
+                          Padding(
+                            padding: EdgeInsets.only(top: 10),
+                            child: Row(
+                              children: [
+                                BackButton(
+                                  onPressed: () {
+                                    Navigator.pop(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => adminpage()),
+                                    );
+                                    _clearassignpage();
+                                  },
+                                ),
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.16,
+                                ),
+                                Text(
+                                  "${checkInserttask}" + ' Task',
+                                  style: GoogleFonts.poppins(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                      fontSize:
+                                          MediaQuery.of(context).size.width *
+                                              0.06),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                              height:
+                                  MediaQuery.of(context).size.height * 0.01),
+                          Row(
+                            children: [
+                              mediumtext(
+                                text: 'Task Category',
+                              ),
+                              Spacer(),
+                              OutlinedButton(
+                                style: OutlinedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(30.0)),
+                                ),
+                                onPressed: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (_) => FunkyOverlayforcategory(),
+                                  );
+                                  setState(() {});
+                                },
+                                child: Text('Add Category',
+                                    style: GoogleFonts.lato(
+                                      color: Colors.black,
+                                      fontSize: 15,
+                                    )),
+                              )
+                            ],
+                          ),
+                          Center(
+                            child: Container(
+                              height: MediaQuery.of(context).size.height * 0.07,
+                              width: MediaQuery.of(context).size.width * 0.9,
+                              decoration: new BoxDecoration(
+                                color: Colors.black,
+                                shape: BoxShape.rectangle,
+                                border: Border.all(width: 1.0),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20.0)),
+                              ),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Row(
+                                    children: [
+                                      SizedBox(width: 20),
+                                      new DropdownButtonHideUnderline(
+                                        child: DropdownButton(
+                                            icon: Icon(
+                                              Icons.arrow_drop_down,
+                                              color: Colors.white,
+                                              size: 20.09,
+                                            ),
+                                            alignment: Alignment.centerLeft,
+                                            dropdownColor: Colors.black,
+                                            value: categoryvalue,
+                                            items: category_list
+                                                .map((String item) {
+                                              return DropdownMenuItem(
+                                                value: item,
+                                                child: Text(item),
+                                              );
+                                            }).toList(),
+                                            // After selecting the desired option,it will
+                                            // change button value to selected value
+                                            onChanged: (String? newValue) {
+                                              setState(() {
+                                                categoryvalue = newValue!;
+                                              });
+                                            },
+                                            style: GoogleFonts.lato(
+                                              color: Colors.white,
+                                              fontSize: 15,
+                                            )),
+                                      )
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+
                           mediumtext(
-                            text: 'Task Category',
+                            text: 'Choose Faculty',
                           ),
-                          Spacer(),
-                          OutlinedButton(
-                            style: OutlinedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(30.0)),
-                            ),
-                            onPressed: () {
-                              showDialog(
-                                context: context,
-                                builder: (_) => FunkyOverlayforcategory(),
-                              );
-                              setState(() {});
-                            },
-                            child: Text('Add Category',
-                                style: GoogleFonts.lato(
-                                  color: Colors.black,
-                                  fontSize: 15,
-                                )),
-                          )
-                        ],
-                      ),
-                      Center(
-                        child: Container(
-                          height: MediaQuery.of(context).size.height * 0.07,
-                          width: MediaQuery.of(context).size.width * 0.9,
-                          decoration: new BoxDecoration(
-                            color: Colors.black,
-                            shape: BoxShape.rectangle,
-                            border: Border.all(width: 1.0),
-                            borderRadius:
-                            BorderRadius.all(Radius.circular(20.0)),
-                          ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Row(
-                                children: [
-                                  SizedBox(width: 20),
-                                  new DropdownButtonHideUnderline(
-                                    child: DropdownButton(
-                                        icon: Icon(
-                                          Icons.arrow_drop_down,
-                                          color: Colors.white,
-                                          size: 20.09,
-                                        ),
-                                        alignment: Alignment.centerLeft,
-                                        dropdownColor: Colors.black,
-                                        value: categoryvalue,
-                                        items: category_list.map((String item) {
-                                          return DropdownMenuItem(
-                                            value: item,
-                                            child: Text(item),
-                                          );
-                                        }).toList(),
-                                        // After selecting the desired option,it will
-                                        // change button value to selected value
-                                        onChanged: (String? newValue) {
-                                          setState(() {
-                                            categoryvalue = newValue!;
-                                          });
-                                        },
-                                        style: GoogleFonts.lato(
-                                          color: Colors.white,
-                                          fontSize: 15,
-                                        )),
-                                  )
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-
-                      mediumtext(
-                        text: 'Choose Faculty',
-                      ),
-                      Center(
-                        child: Container(
-                          height: MediaQuery.of(context).size.height * 0.07,
-                          width: MediaQuery.of(context).size.width * 0.9,
-                          decoration: new BoxDecoration(
-                            color: Colors.black,
-                            shape: BoxShape.rectangle,
-                            border: Border.all(width: 1.0),
-                            borderRadius:
-                            BorderRadius.all(Radius.circular(20.0)),
-                          ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Row(
-                                children: [
-                                  SizedBox(width: 20),
-                                  new DropdownButtonHideUnderline(
-                                    child: DropdownButton(
-                                        icon: Icon(
-                                          Icons.arrow_drop_down,
-                                          color: Colors.white,
-                                          size: 20.09,
-                                        ),
-                                        alignment: Alignment.centerLeft,
-                                        dropdownColor: Colors.black,
-                                        value: facultyvalue,
-                                        items:
-                                        faculty_list.map((String faculty) {
-                                          return DropdownMenuItem(
-                                            value: faculty,
-                                            child: Text(faculty),
-                                          );
-                                        }).toList(),
-                                        onChanged: (String? newValue) {
-                                          setState(() {
-                                            facultyvalue = newValue!;
-                                          });
-                                        },
-                                        style: GoogleFonts.lato(
-                                          color: Colors.white,
-                                          fontSize: 15,
-                                        )),
-                                  )
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.075,
-                      ),
-                      mediumtext(
-                        text: 'Task Details',
-                      ),
-
-                      Center(
-                        child: Column(
-                          children: [
-                            Container(
+                          Center(
+                            child: Container(
+                              height: MediaQuery.of(context).size.height * 0.07,
                               width: MediaQuery.of(context).size.width * 0.9,
                               decoration: new BoxDecoration(
-                                color: Color(0xFFF7F8F8),
+                                color: Colors.black,
                                 shape: BoxShape.rectangle,
                                 border: Border.all(width: 1.0),
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(15.0)),
+                                    BorderRadius.all(Radius.circular(20.0)),
                               ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: TextField(
-                                  style: GoogleFonts.poppins(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w400,
-                                      fontSize:
-                                      MediaQuery.of(context).size.width *
-                                          0.036),
-                                  onChanged: (_) {
-                                    if (_.length > 0)
-                                      widget.grey = false;
-                                    else
-                                      widget.grey = true;
-                                    setState(() {});
-                                  },
-                                  decoration: InputDecoration(
-                                      alignLabelWithHint: true,
-                                      fillColor: Colors.black,
-                                      border: InputBorder.none,
-                                      hintText: ' Enter title',
-                                      hintStyle: GoogleFonts.poppins(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.w200,
-                                        fontSize: 16,
-                                      )),
-                                  keyboardType: TextInputType.text,
-                                  cursorColor: Colors.black,
-
-                                  controller: tasktitlecontroller,
-
-                                  ///enter title
-                                ),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Row(
+                                    children: [
+                                      SizedBox(width: 20),
+                                      new DropdownButtonHideUnderline(
+                                        child: DropdownButton(
+                                            icon: Icon(
+                                              Icons.arrow_drop_down,
+                                              color: Colors.white,
+                                              size: 20.09,
+                                            ),
+                                            alignment: Alignment.centerLeft,
+                                            dropdownColor: Colors.black,
+                                            value: facultyvalue,
+                                            items: faculty_list
+                                                .map((String faculty) {
+                                              return DropdownMenuItem(
+                                                value: faculty,
+                                                child: Text(faculty),
+                                              );
+                                            }).toList(),
+                                            onChanged: (String? newValue) {
+                                              setState(() {
+                                                facultyvalue = newValue!;
+                                              });
+                                            },
+                                            style: GoogleFonts.lato(
+                                              color: Colors.white,
+                                              fontSize: 15,
+                                            )),
+                                      )
+                                    ],
+                                  ),
+                                ],
                               ),
                             ),
-                            SizedBox(
-                                height:
-                                MediaQuery.of(context).size.height * 0.01),
-                            Container(
-                              width: MediaQuery.of(context).size.width * 0.9,
-                              decoration: new BoxDecoration(
-                                color: Color(0xFFF7F8F8),
-                                shape: BoxShape.rectangle,
-                                border: Border.all(width: 1.0),
-                                borderRadius:
-                                BorderRadius.all(Radius.circular(15.0)),
-                              ),
-                              constraints: BoxConstraints(minHeight: 60),
-                              child: Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: TextField(
-                                  style: GoogleFonts.poppins(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w400,
-                                      fontSize:
-                                      MediaQuery.of(context).size.width *
-                                          0.036),
-                                  maxLines: null,
-                                  onChanged: (_) {
-                                    if (_.length > 0)
-                                      widget.grey = false;
-                                    else
-                                      widget.grey = true;
-                                    setState(() {});
-                                  },
-                                  decoration: InputDecoration(
-                                      fillColor: Colors.white,
-                                      border: InputBorder.none,
-                                      hintText: ' Enter description',
-                                      hintStyle: GoogleFonts.poppins(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.w200,
-                                        fontSize: 16,
-                                      )),
-                                  keyboardType: TextInputType.text,
-                                  // maxLines: 20,
-                                  cursorColor: Colors.black,
-                                  controller: taskdescriptioncontroller,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-
-                      mediumtext(text: 'Event details'),
-                      Center(
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 10.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Center(
-                                child: OutlinedButton(
-                                  onPressed: () async {
-                                    final datePick = await showDatePicker(
-                                      context: context,
-                                      initialDate: startDate,
-                                      firstDate: new DateTime(1900),
-                                      lastDate: new DateTime.now()
-                                          .add(Duration(days: 365)),
-                                      builder: (context, child) {
-                                        return Theme(
-                                          data: Theme.of(context).copyWith(
-                                            colorScheme: ColorScheme.light(
-                                              primary: Colors
-                                                  .black, // header background color
-                                              onPrimary: Colors
-                                                  .white, // header text color
-                                              onSurface: Colors
-                                                  .black, // body text color
-                                            ),
-                                            textButtonTheme:
-                                            TextButtonThemeData(
-                                              style: TextButton.styleFrom(
-                                                primary: Colors
-                                                    .black, // button text color
-                                              ),
-                                            ),
-                                          ),
-                                          child: child!,
-                                        );
-                                      },
-                                    );
-                                    if (datePick != null &&
-                                        datePick != startDate) {
-                                      setState(() {
-                                        startDate = datePick;
-                                        isDateSelected = true;
-
-                                        // put it here
-                                        startDateInString =
-                                        "${startDate.day}/${startDate.month}/${startDate.year}";
-                                        print(startDateInString); // 08/14/2019
-                                      });
-                                    }
-                                    setState(() {});
-                                  },
-                                  style: OutlinedButton.styleFrom(
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                        BorderRadius.circular(30.0)),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: (startDateInString != '')
-                                        ? Text(
-                                      startDateInString,
-                                      style: GoogleFonts.poppins(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 15,
-                                      ),
-                                    )
-                                        : Text("Start date",
-                                        style: GoogleFonts.poppins(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 15,
-                                        )),
-                                  ),
-                                ),
-                              ),
-                              mediumtext(text: ' - '),
-                              Center(
-                                child: OutlinedButton(
-                                  onPressed: () async {
-                                    final datePick = await showDatePicker(
-                                      context: context,
-                                      initialDate: endDate,
-                                      firstDate: startDate,
-                                      lastDate: new DateTime.now()
-                                          .add(Duration(days: 365)),
-                                      builder: (context, child) {
-                                        return Theme(
-                                          data: Theme.of(context).copyWith(
-                                            colorScheme: ColorScheme.light(
-                                              primary: Colors
-                                                  .black, // header background color
-                                              onPrimary: Colors
-                                                  .white, // header text color
-                                              onSurface: Colors
-                                                  .black, // body text color
-                                            ),
-                                            textButtonTheme:
-                                            TextButtonThemeData(
-                                              style: TextButton.styleFrom(
-                                                primary: Colors
-                                                    .black, // button text color
-                                              ),
-                                            ),
-                                          ),
-                                          child: child!,
-                                        );
-                                      },
-                                    );
-                                    if (datePick != null &&
-                                        datePick != endDate) {
-                                      setState(() {
-                                        endDate = datePick;
-                                        isDateSelected = true;
-
-                                        // put it here
-                                        endDateInString =
-                                        "${endDate.day}/${endDate.month}/${endDate.year}";
-                                        print(endDateInString); // 08/14/2019
-                                      });
-                                    }
-                                    setState(() {});
-                                  },
-                                  style: OutlinedButton.styleFrom(
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                        BorderRadius.circular(30.0)),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: (endDateInString != '')
-                                        ? Text(
-                                      endDateInString,
-                                      style: GoogleFonts.poppins(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 15,
-                                      ),
-                                    )
-                                        : Text("End date",
-                                        style: GoogleFonts.poppins(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 15,
-                                        )),
-                                  ),
-                                ),
-                              ),
-                            ],
                           ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.02,
-                      ),
-                      Center(
-                          child: Row(
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.075,
+                          ),
+                          mediumtext(
+                            text: 'Task Details',
+                          ),
+
+                          Center(
+                            child: Column(
+                              children: [
+                                Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.9,
+                                  decoration: new BoxDecoration(
+                                    color: Color(0xFFF7F8F8),
+                                    shape: BoxShape.rectangle,
+                                    border: Border.all(width: 1.0),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(15.0)),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: TextField(
+                                      style: GoogleFonts.poppins(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.036),
+                                      onChanged: (_) {
+                                        if (_.length > 0)
+                                          widget.grey = false;
+                                        else
+                                          widget.grey = true;
+                                        setState(() {});
+                                      },
+                                      decoration: InputDecoration(
+                                          alignLabelWithHint: true,
+                                          fillColor: Colors.black,
+                                          border: InputBorder.none,
+                                          hintText: ' Enter title',
+                                          hintStyle: GoogleFonts.poppins(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.w200,
+                                            fontSize: 16,
+                                          )),
+                                      keyboardType: TextInputType.text,
+                                      cursorColor: Colors.black,
+
+                                      controller: tasktitlecontroller,
+
+                                      ///enter title
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.01),
+                                Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.9,
+                                  decoration: new BoxDecoration(
+                                    color: Color(0xFFF7F8F8),
+                                    shape: BoxShape.rectangle,
+                                    border: Border.all(width: 1.0),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(15.0)),
+                                  ),
+                                  constraints: BoxConstraints(minHeight: 60),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: TextField(
+                                      style: GoogleFonts.poppins(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.036),
+                                      maxLines: null,
+                                      onChanged: (_) {
+                                        if (_.length > 0)
+                                          widget.grey = false;
+                                        else
+                                          widget.grey = true;
+                                        setState(() {});
+                                      },
+                                      decoration: InputDecoration(
+                                          fillColor: Colors.white,
+                                          border: InputBorder.none,
+                                          hintText: ' Enter description',
+                                          hintStyle: GoogleFonts.poppins(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.w200,
+                                            fontSize: 16,
+                                          )),
+                                      keyboardType: TextInputType.text,
+                                      // maxLines: 20,
+                                      cursorColor: Colors.black,
+                                      controller: taskdescriptioncontroller,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+
+                          mediumtext(text: 'Event details'),
+                          Center(
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 10.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Center(
+                                    child: OutlinedButton(
+                                      onPressed: () async {
+                                        final datePick = await showDatePicker(
+                                          context: context,
+                                          initialDate: startDate,
+                                          firstDate: new DateTime(1900),
+                                          lastDate: new DateTime.now()
+                                              .add(Duration(days: 365)),
+                                          builder: (context, child) {
+                                            return Theme(
+                                              data: Theme.of(context).copyWith(
+                                                colorScheme: ColorScheme.light(
+                                                  primary: Colors
+                                                      .black, // header background color
+                                                  onPrimary: Colors
+                                                      .white, // header text color
+                                                  onSurface: Colors
+                                                      .black, // body text color
+                                                ),
+                                                textButtonTheme:
+                                                    TextButtonThemeData(
+                                                  style: TextButton.styleFrom(
+                                                    primary: Colors
+                                                        .black, // button text color
+                                                  ),
+                                                ),
+                                              ),
+                                              child: child!,
+                                            );
+                                          },
+                                        );
+                                        if (datePick != null &&
+                                            datePick != startDate) {
+                                          setState(() {
+                                            startDate = datePick;
+                                            isDateSelected = true;
+
+                                            // put it here
+                                            startDateInString =
+                                                "${startDate.day}/${startDate.month}/${startDate.year}";
+                                            print(
+                                                startDateInString); // 08/14/2019
+                                          });
+                                        }
+                                        setState(() {});
+                                      },
+                                      style: OutlinedButton.styleFrom(
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(30.0)),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(10.0),
+                                        child: (startDateInString != '')
+                                            ? Text(
+                                                startDateInString,
+                                                style: GoogleFonts.poppins(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.w400,
+                                                  fontSize: 15,
+                                                ),
+                                              )
+                                            : Text("Start date",
+                                                style: GoogleFonts.poppins(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.w400,
+                                                  fontSize: 15,
+                                                )),
+                                      ),
+                                    ),
+                                  ),
+                                  mediumtext(text: ' - '),
+                                  Center(
+                                    child: OutlinedButton(
+                                      onPressed: () async {
+                                        final datePick = await showDatePicker(
+                                          context: context,
+                                          initialDate: startDate,
+                                          firstDate: new DateTime(1900),
+                                          lastDate: new DateTime.now()
+                                              .add(Duration(days: 365)),
+                                          builder: (context, child) {
+                                            return Theme(
+                                              data: Theme.of(context).copyWith(
+                                                colorScheme: ColorScheme.light(
+                                                  primary: Colors
+                                                      .black, // header background color
+                                                  onPrimary: Colors
+                                                      .white, // header text color
+                                                  onSurface: Colors
+                                                      .black, // body text color
+                                                ),
+                                                textButtonTheme:
+                                                    TextButtonThemeData(
+                                                  style: TextButton.styleFrom(
+                                                    primary: Colors
+                                                        .black, // button text color
+                                                  ),
+                                                ),
+                                              ),
+                                              child: child!,
+                                            );
+                                          },
+                                        );
+                                        if (datePick != null &&
+                                            datePick != endDate) {
+                                          setState(() {
+                                            endDate = datePick;
+                                            isDateSelected = true;
+
+                                            // put it here
+                                            endDateInString =
+                                                "${endDate.day}/${endDate.month}/${endDate.year}";
+                                            print(
+                                                endDateInString); // 08/14/2019
+                                          });
+                                        }
+                                        setState(() {});
+                                      },
+                                      style: OutlinedButton.styleFrom(
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(30.0)),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(10.0),
+                                        child: (endDateInString != '')
+                                            ? Text(
+                                                endDateInString,
+                                                style: GoogleFonts.poppins(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.w400,
+                                                  fontSize: 15,
+                                                ),
+                                              )
+                                            : Text("End date",
+                                                style: GoogleFonts.poppins(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.w400,
+                                                  fontSize: 15,
+                                                )),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.02,
+                          ),
+                          Center(
+                              child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Padding(
@@ -525,9 +537,10 @@ class _taskassign_aState extends State<taskassign_a> {
                                     onPressed: () async {
                                       final datePick = await showDatePicker(
                                         context: context,
-                                        initialDate: DateTime.now(),
-                                        firstDate: DateTime.now(),
-                                        lastDate: startDate,
+                                        initialDate: startDate,
+                                        firstDate: new DateTime(1900),
+                                        lastDate: new DateTime.now()
+                                            .add(Duration(days: 365)),
                                         builder: (context, child) {
                                           return Theme(
                                             data: Theme.of(context).copyWith(
@@ -536,10 +549,11 @@ class _taskassign_aState extends State<taskassign_a> {
                                                     .black, // header background color
                                                 onPrimary: Colors
                                                     .white, // header text color
-                                                onSurface:
-                                                Colors.black, // body text color
+                                                onSurface: Colors
+                                                    .black, // body text color
                                               ),
-                                              textButtonTheme: TextButtonThemeData(
+                                              textButtonTheme:
+                                                  TextButtonThemeData(
                                                 style: TextButton.styleFrom(
                                                   primary: Colors
                                                       .black, // button text color
@@ -550,14 +564,15 @@ class _taskassign_aState extends State<taskassign_a> {
                                           );
                                         },
                                       );
-                                      if (datePick != null && datePick != dueDate) {
+                                      if (datePick != null &&
+                                          datePick != dueDate) {
                                         setState(() {
                                           dueDate = datePick;
                                           isDateSelected = true;
 
                                           // put it here
                                           dueDateInString =
-                                          "${dueDate.day}/${dueDate.month}/${dueDate.year}";
+                                              "${dueDate.day}/${dueDate.month}/${dueDate.year}";
                                           print(dueDateInString); // 08/14/2019
                                         });
                                       }
@@ -566,7 +581,7 @@ class _taskassign_aState extends State<taskassign_a> {
                                     style: OutlinedButton.styleFrom(
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
-                                          BorderRadius.circular(30.0)),
+                                              BorderRadius.circular(30.0)),
                                     ),
                                     child: Padding(
                                       padding: const EdgeInsets.all(10.0),
@@ -575,19 +590,21 @@ class _taskassign_aState extends State<taskassign_a> {
                                           children: [
                                             (dueDateInString != '')
                                                 ? Text(
-                                              dueDateInString,
-                                              style: GoogleFonts.poppins(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.w400,
-                                                fontSize: 15,
-                                              ),
-                                            )
+                                                    dueDateInString,
+                                                    style: GoogleFonts.poppins(
+                                                      color: Colors.black,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      fontSize: 15,
+                                                    ),
+                                                  )
                                                 : Text("Due Date",
-                                                style: GoogleFonts.poppins(
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize: 15,
-                                                )),
+                                                    style: GoogleFonts.poppins(
+                                                      color: Colors.black,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      fontSize: 15,
+                                                    )),
                                           ],
                                         ),
                                       ),
@@ -599,13 +616,15 @@ class _taskassign_aState extends State<taskassign_a> {
                                 width: MediaQuery.of(context).size.width * 0.05,
                               ),
                               Container(
-                                  height: MediaQuery.of(context).size.height * 0.08,
-                                  width: MediaQuery.of(context).size.width * 0.35,
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.08,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.35,
                                   child: DateTimePicker(
                                     type: DateTimePickerType.time,
                                     textAlign: TextAlign.center,
                                     timeHintText:
-                                    (duetime != '') ? duetime : "Due Time",
+                                        (duetime != '') ? duetime : "Due Time",
                                     cursorColor: Colors.black,
                                     style: GoogleFonts.poppins(
                                       color: Colors.black,
@@ -620,196 +639,146 @@ class _taskassign_aState extends State<taskassign_a> {
                                   )),
                             ],
                           )),
-                      SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.01),
+                          SizedBox(
+                              height:
+                                  MediaQuery.of(context).size.height * 0.01),
 
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(12, 0, 12, 0),
-                        child: Text(
-                          'Reason',
-                          style: GoogleFonts.lato(
-                            color: Colors.black,
-                            fontSize: 16,
-                          ),
-                        ),
+                          SizedBox(
+                              height: MediaQuery.of(context).size.width * 0.2)
+
+                          ///TODO: Add task assigning datas with setting parameters
+                          ///try ov-ai profile page and try to implement according to ui design
+                        ],
                       ),
-
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(12, 0, 12, 0),
-                        child: Container(
-                          width: MediaQuery.of(context).size.width * 0.9,
-                          decoration: new BoxDecoration(
-                            color: Color(0xFFF7F8F8),
-                            shape: BoxShape.rectangle,
-                            border: Border.all(width: 1.0),
-                            borderRadius:
-                            BorderRadius.all(Radius.circular(15.0)),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: TextField(
-                              style: GoogleFonts.poppins(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: MediaQuery.of(context).size.width *
-                                      0.036),
-                              onChanged: (_) {
-                                if (_.length > 0)
-                                  widget.grey = false;
-                                else
-                                  widget.grey = true;
-                                setState(() {});
-                              },
-                              decoration: InputDecoration(
-                                  alignLabelWithHint: true,
-                                  fillColor: Colors.black,
-                                  border: InputBorder.none,
-                                  hintText:
-                                  ' Enter why you chose this faculty here',
-                                  hintStyle: GoogleFonts.poppins(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w200,
-                                    fontSize: 16,
-                                  )),
-                              keyboardType: TextInputType.text,
-                              cursorColor: Colors.black,
-
-                              controller: adminreasoncontroller,
-
-                              ///enter title
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: MediaQuery.of(context).size.width*0.2)
-                      ///TODO: Add task assigning datas with setting parameters
-                      ///try ov-ai profile page and try to implement according to ui design
-                    ],
+                    ),
                   ),
                 ),
-              ),
-            ),
-            floatingActionButton: (checkInserttask == 'Update')
-                ? Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: MaterialButton(
-                        onPressed: () async {
-                          if (document != null) {
-                            if (document['faculty'] == facultyvalue) {
-                              await FirebaseTask.updateTask(
-                                      categorydb: categoryvalue,
-                                      titledb: tasktitlecontroller.text,
-                                      descriptiondb:
-                                          taskdescriptioncontroller.text,
-                                      startdatedb: startDateInString,
-                                      enddatedb: endDateInString,
-                                      duedatedb: dueDateInString,
-                                      duetimedb: duetime,
-                                      facultydb: facultyvalue,
-                                      statusdb: document['status'],
-                                      reasondb: document['reason'],
-                                      admindb: adminreasoncontroller.text,
-                                      docId: document!.id)
-                                  .whenComplete(
-                                () => Navigator.pop(context),
-                              );
-                            } else {
-                              await FirebaseTask.updateTask(
-                                      categorydb: categoryvalue,
-                                      titledb: tasktitlecontroller.text,
-                                      descriptiondb:
-                                          taskdescriptioncontroller.text,
-                                      startdatedb: startDateInString,
-                                      enddatedb: endDateInString,
-                                      duedatedb: dueDateInString,
-                                      duetimedb: duetime,
-                                      facultydb: facultyvalue,
-                                      statusdb: status,
-                                      reasondb: reason,
-                                      admindb: adminreasoncontroller.text,
-                                      docId: document!.id)
-                                  .whenComplete(
-                                () => Navigator.pop(context),
-                              );
-                            }
-                            _clearassignpage();
-                          }
-
-                          print('updateeeeeeeeee');
-                        },
-                        child: Container(
-                          height: MediaQuery.of(context).size.height * 0.05,
-                          width: MediaQuery.of(context).size.width * 0.4,
-                          decoration: new BoxDecoration(
-                            color: Colors.white,
-                            shape: BoxShape.rectangle,
-                            border: Border.all(width: 2.0),
-                            borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Center(
-                              child: Text(
-                                'Update',
-                                style: GoogleFonts.lato(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize:12),
-                              ),
-                            ),
-                          ),
-                        )),
-            )
-                : (checkInserttask == 'Assign')
+                floatingActionButton: (checkInserttask == 'Update')
                     ? Padding(
                         padding: const EdgeInsets.all(15.0),
                         child: MaterialButton(
-                            onPressed: () {
-                              setState(() {});
-                              FirebaseTask.addTask(
-                                  todaydatedb: todayDateinString,
-                                  categorydb: categoryvalue,
-                                  titledb: tasktitlecontroller.text,
-                                  descriptiondb: taskdescriptioncontroller.text,
-                                  startdatedb: startDateInString,
-                                  enddatedb: endDateInString,
-                                  duedatedb: dueDateInString,
-                                  duetimedb: duetime,
-                                  facultydb: facultyvalue,
-                                  admindb: adminreasoncontroller.text,
-                                  statusdb: status,
-                                  reasondb: reason);
-                              _clearassignpage();
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => adminpage()),
-                              );
+                            onPressed: () async {
+                              if (document != null) {
+                                if (document['faculty'] == facultyvalue) {
+                                  await FirebaseTask.updateTask(
+                                          categorydb: categoryvalue,
+                                          titledb: tasktitlecontroller.text,
+                                          descriptiondb:
+                                              taskdescriptioncontroller.text,
+                                          startdatedb: startDateInString,
+                                          enddatedb: endDateInString,
+                                          duedatedb: dueDateInString,
+                                          duetimedb: duetime,
+                                          facultydb: facultyvalue,
+                                          statusdb: document['status'],
+                                          reasondb: document['reason'],
+                                          admindb: document['admin'],
+                                          docId: document!.id)
+                                      .whenComplete(
+                                    () => Navigator.pop(context),
+                                  );
+                                } else {
+                                  await FirebaseTask.updateTask(
+                                          categorydb: categoryvalue,
+                                          titledb: tasktitlecontroller.text,
+                                          descriptiondb:
+                                              taskdescriptioncontroller.text,
+                                          startdatedb: startDateInString,
+                                          enddatedb: endDateInString,
+                                          duedatedb: dueDateInString,
+                                          duetimedb: duetime,
+                                          facultydb: facultyvalue,
+                                          statusdb: status,
+                                          reasondb: document['reason'],
+                                          admindb: document['admin'],
+                                          docId: document!.id)
+                                      .whenComplete(
+                                    () => Navigator.pop(context),
+                                  );
+                                }
+                                _clearassignpage();
+                              }
+
+                              print(
+                                  'Update task button pressed and task updated successfully');
                             },
-    child: Container(
-    height: MediaQuery.of(context).size.height * 0.05,
-    width: MediaQuery.of(context).size.width * 0.4,
-    decoration: new BoxDecoration(
-    color: Colors.white,
-    shape: BoxShape.rectangle,
-    border: Border.all(width: 2.0),
-    borderRadius:
-    BorderRadius.all(Radius.circular(20.0)),
-    ),
-    child: Padding(
-    padding: const EdgeInsets.all(10.0),
-    child: Center(
-    child: Text(
-    'Add Task',
-    style: GoogleFonts.lato(
-    color: Colors.black,
-    fontWeight: FontWeight.bold,
-    fontSize: 12,
-    ),
-    ),
-    ),
-    ))))
-        : SizedBox())));
+                            child: Container(
+                              height: MediaQuery.of(context).size.height * 0.05,
+                              width: MediaQuery.of(context).size.width * 0.4,
+                              decoration: new BoxDecoration(
+                                color: Colors.white,
+                                shape: BoxShape.rectangle,
+                                border: Border.all(width: 2.0),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20.0)),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Center(
+                                  child: Text(
+                                    'Update',
+                                    style: GoogleFonts.lato(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 12),
+                                  ),
+                                ),
+                              ),
+                            )),
+                      )
+                    : (checkInserttask == 'Assign')
+                        ? Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: MaterialButton(
+                                onPressed: () {
+                                  setState(() {});
+                                  FirebaseTask.addTask(
+                                      todaydatedb: todayDateinString,
+                                      categorydb: categoryvalue,
+                                      titledb: tasktitlecontroller.text,
+                                      descriptiondb:
+                                          taskdescriptioncontroller.text,
+                                      startdatedb: startDateInString,
+                                      enddatedb: endDateInString,
+                                      duedatedb: dueDateInString,
+                                      duetimedb: duetime,
+                                      facultydb: facultyvalue,
+                                      admindb: '',
+                                      statusdb: status,
+                                      reasondb: reason);
+                                  _clearassignpage();
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => adminpage()),
+                                  );
+                                },
+                                child: Container(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.05,
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.4,
+                                    decoration: new BoxDecoration(
+                                      color: Colors.white,
+                                      shape: BoxShape.rectangle,
+                                      border: Border.all(width: 2.0),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(20.0)),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(10.0),
+                                      child: Center(
+                                        child: Text(
+                                          'Add Task',
+                                          style: GoogleFonts.lato(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 12,
+                                          ),
+                                        ),
+                                      ),
+                                    ))))
+                        : SizedBox())));
   }
 
   void _clearassignpage() {
@@ -822,7 +791,6 @@ class _taskassign_aState extends State<taskassign_a> {
     dueDateInString = '';
     duetime = "";
     facultyvalue = "S.Anand";
-    adminreasoncontroller.clear();
   }
 }
 
