@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
 import 'package:rounded_expansion_tile/rounded_expansion_tile.dart';
@@ -22,6 +23,7 @@ Color bb = Color(0xFFADA4A5);
 Color b = Color(0xFF817B7C);
 int _selectedIndexuser = 0;
 int assignedtasks = 0;
+int ctu = 0;
 
 class userpage extends StatefulWidget {
   late final Box<dynamic> box;
@@ -60,7 +62,7 @@ class _userpageState extends State<userpage> {
       onRefresh: () async {
         await Future.delayed(Duration(seconds: 1));
         setState(() {
-          ct += 1;
+          ctu += 1;
         });
       },
       child: Container(
@@ -155,6 +157,14 @@ class _userpageState extends State<userpage> {
               child: Container(
                 height: MediaQuery.of(context).size.height * 0.3,
                 decoration: new BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.3),
+                      spreadRadius: 1,
+                      blurRadius: 5,
+                      offset: Offset(1, 2), // changes position of shadow
+                    ),
+                  ],
                   color: Colors.white,
                   shape: BoxShape.rectangle,
                   border: Border.all(width: 1.0),
@@ -259,6 +269,7 @@ class _userpageState extends State<userpage> {
                                       );
                                     });
                                   }
+                                  setState(() {});
                                 },
                                 child: Padding(
                                   padding: EdgeInsets.fromLTRB(6, 0, 6, 8),
@@ -356,7 +367,7 @@ class _userpageState extends State<userpage> {
                                                         document['category'],
                                                         style: GoogleFonts.poppins(
                                                             fontWeight:
-                                                                FontWeight.w500,
+                                                                FontWeight.w300,
                                                             color: Colors.black,
                                                             fontSize: MediaQuery.of(
                                                                         context)
@@ -368,8 +379,6 @@ class _userpageState extends State<userpage> {
                                                   ],
                                                 ),
                                                 Container(
-                                                  padding: EdgeInsets.fromLTRB(
-                                                      0, 5, 0, 0),
                                                   constraints: BoxConstraints(
                                                       maxWidth:
                                                           MediaQuery.of(context)
@@ -446,7 +455,7 @@ class _userpageState extends State<userpage> {
                                                                       context)
                                                                   .size
                                                                   .width *
-                                                              0.6),
+                                                              0.8),
                                                       child: Text(
                                                         '        ' +
                                                             document[
@@ -686,7 +695,7 @@ class _userpageState extends State<userpage> {
                                               child: Text(
                                                 document['category'],
                                                 style: GoogleFonts.poppins(
-                                                    fontWeight: FontWeight.w500,
+                                                    fontWeight: FontWeight.w300,
                                                     color: Colors.black,
                                                     fontSize:
                                                         MediaQuery.of(context)
@@ -698,8 +707,6 @@ class _userpageState extends State<userpage> {
                                           ],
                                         ),
                                         Container(
-                                          padding:
-                                              EdgeInsets.fromLTRB(0, 5, 0, 0),
                                           constraints: BoxConstraints(
                                               maxWidth: MediaQuery.of(context)
                                                       .size
@@ -767,7 +774,7 @@ class _userpageState extends State<userpage> {
                                                       MediaQuery.of(context)
                                                               .size
                                                               .width *
-                                                          0.6),
+                                                          0.8),
                                               child: Text(
                                                 '        ' +
                                                     document['description'],
@@ -935,151 +942,163 @@ class FunkyOverlayacceptdeclineState extends State<FunkyOverlayacceptdecline>
                     borderRadius: BorderRadius.circular(15.0))),
             child: Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: Container(
-                    height: MediaQuery.of(context).size.height * 0.24,
-                    width: MediaQuery.of(context).size.width * 0.88,
-                    decoration: ShapeDecoration(
-                        color: Colors.white,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15.0))),
-                    child: (widget.accept == 1)
-                        ? Column(
-                            children: [
-                              Text(
-                                "Do you wish to accept the task ?",
-                                style: GoogleFonts.poppins(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize:
-                                        MediaQuery.of(context).size.width *
-                                            0.035),
-                              ),
-                              Row(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(15.0),
-                                    child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                            elevation: 5.0,
-                                            shape: StadiumBorder(),
-                                            primary: Colors.black),
-                                        onPressed: () {
-                                          Navigator.pop(context);
-                                        },
-                                        child: Padding(
-                                          padding: EdgeInsets.fromLTRB(
-                                              MediaQuery.of(context)
+                child: (widget.accept == 1)
+                    ? Container(
+                        height: MediaQuery.of(context).size.height * 0.14,
+                        width: MediaQuery.of(context).size.width * 0.88,
+                        decoration: ShapeDecoration(
+                            color: Colors.white,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15.0))),
+                        child: Column(
+                          children: [
+                            Text(
+                              "Do you wish to accept the task ?",
+                              style: GoogleFonts.poppins(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: MediaQuery.of(context).size.width *
+                                      0.040),
+                            ),
+                            Spacer(),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          elevation: 5.0,
+                                          shape: StadiumBorder(),
+                                          primary: Colors.black),
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Padding(
+                                        padding: EdgeInsets.fromLTRB(
+                                            MediaQuery.of(context).size.height *
+                                                0.04,
+                                            12,
+                                            MediaQuery.of(context).size.height *
+                                                0.04,
+                                            12),
+                                        child: Text(
+                                          'No',
+                                          style: GoogleFonts.lato(
+                                              color: Colors.white,
+                                              fontSize: MediaQuery.of(context)
                                                       .size
                                                       .height *
-                                                  0.0375,
-                                              10,
-                                              MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  0.0375,
-                                              10),
-                                          child: Text(
-                                            'No',
-                                            style: GoogleFonts.lato(
-                                                color: Colors.white,
-                                                fontSize: MediaQuery.of(context)
-                                                        .size
-                                                        .height *
-                                                    0.02),
-                                          ),
-                                        )),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(15.0),
-                                    child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                            elevation: 5.0,
-                                            shape: StadiumBorder(),
-                                            primary: Colors.black),
-                                        onPressed: () async {
-                                          setState(() {
-                                            status = 1;
-                                          });
+                                                  0.02),
+                                        ),
+                                      )),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          elevation: 5.0,
+                                          shape: StadiumBorder(),
+                                          primary: Colors.black),
+                                      onPressed: () async {
+                                        setState(() {
+                                          status = 1;
+                                        });
 
-                                          ///todo:accept to be work
-                                          if (document != null) {
-                                            await FirebaseTask.updateTask(
-                                                    admindb: document['admin'],
-                                                    categorydb:
-                                                        document['category'],
-                                                    titledb: document['title'],
-                                                    descriptiondb:
-                                                        document['description'],
-                                                    startdatedb:
-                                                        document['startdate'],
-                                                    enddatedb:
-                                                        document['enddate'],
-                                                    duedatedb:
-                                                        document['duedate'],
-                                                    duetimedb:
-                                                        document['duetime'],
-                                                    facultydb:
-                                                        document['faculty'],
-                                                    statusdb: status,
-                                                    reasondb: 'NIL',
-                                                    docId: document.id)
-                                                .whenComplete(
-                                              () => Navigator.pop(context),
-                                            );
-                                            print(document['category']);
-                                            print(document['title']);
-                                            print(document['description']);
-                                            print(document['startdate']);
-                                            print(document['enddate']);
-                                            print(document['duedate']);
-                                            print(document['faculty']);
-                                            print(document['status']);
-                                            print(document['reason']);
-                                            print('Accepted !');
-                                          } else {
-                                            print('dopcument is null');
-                                          }
-                                        },
-                                        child: Padding(
-                                          padding: EdgeInsets.fromLTRB(
-                                              MediaQuery.of(context)
+                                        ///todo:accept to be work
+                                        if (document != null) {
+                                          showDialog(
+                                              context: context,
+                                              builder: (_) =>
+                                                  SpinKitFoldingCube(
+                                                    color: Colors.black,
+                                                  ));
+                                          await FirebaseTask.updateTask(
+                                                  admindb: document['admin'],
+                                                  categorydb:
+                                                      document['category'],
+                                                  titledb: document['title'],
+                                                  descriptiondb:
+                                                      document['description'],
+                                                  startdatedb:
+                                                      document['startdate'],
+                                                  enddatedb:
+                                                      document['enddate'],
+                                                  duedatedb:
+                                                      document['duedate'],
+                                                  duetimedb:
+                                                      document['duetime'],
+                                                  facultydb:
+                                                      document['faculty'],
+                                                  statusdb: status,
+                                                  reasondb: '',
+                                                  docId: document.id)
+                                              .whenComplete(
+                                            () => Navigator.pop(context),
+                                          );
+                                          Navigator.pop(context);
+                                          print(document['category']);
+                                          print(document['title']);
+                                          print(document['description']);
+                                          print(document['startdate']);
+                                          print(document['enddate']);
+                                          print(document['duedate']);
+                                          print(document['faculty']);
+                                          print(document['status']);
+                                          print(document['reason']);
+                                          print('Accepted !');
+                                        } else {
+                                          print('dopcument is null');
+                                        }
+                                      },
+                                      child: Padding(
+                                        padding: EdgeInsets.fromLTRB(
+                                            MediaQuery.of(context).size.height *
+                                                0.04,
+                                            12,
+                                            MediaQuery.of(context).size.height *
+                                                0.04,
+                                            12),
+                                        child: Text(
+                                          'Accept',
+                                          style: GoogleFonts.lato(
+                                              color: Colors.white,
+                                              fontSize: MediaQuery.of(context)
                                                       .size
                                                       .height *
-                                                  0.0375,
-                                              10,
-                                              MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  0.0375,
-                                              10),
-                                          child: Text(
-                                            'Accept',
-                                            style: GoogleFonts.lato(
-                                                color: Colors.white,
-                                                fontSize: MediaQuery.of(context)
-                                                        .size
-                                                        .height *
-                                                    0.02),
-                                          ),
-                                        )),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          )
-                        : Column(
-                            children: [
-                              Text(
+                                                  0.02),
+                                        ),
+                                      )),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ))
+                    : Container(
+                        height: MediaQuery.of(context).size.height * 0.24,
+                        width: MediaQuery.of(context).size.width * 0.88,
+                        decoration: ShapeDecoration(
+                            color: Colors.white,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15.0))),
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
                                 "Do you wish to decline the task ? ",
                                 style: GoogleFonts.poppins(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w500,
                                     fontSize:
                                         MediaQuery.of(context).size.width *
-                                            0.035),
+                                            0.040),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                height: 40,
                                 child: TextField(
                                   decoration: InputDecoration(
                                     fillColor: Colors.black,
@@ -1092,124 +1111,133 @@ class FunkyOverlayacceptdeclineState extends State<FunkyOverlayacceptdecline>
                                                 0.032),
                                   ),
                                   keyboardType: TextInputType.text,
+                                  maxLines: 2,
                                   cursorColor: Colors.black,
                                   controller: taskreasoncontroller,
+                                  // onSubmitted: (helo) async {
+                                  //   setState(() {
+                                  //     status = -1;
+                                  //   });
+                                  //   Navigator.pop(context);
+                                  // },
                                 ),
                               ),
-                              Row(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(15.0),
-                                    child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                            elevation: 5.0,
-                                            shape: StadiumBorder(),
-                                            primary: Colors.black),
-                                        onPressed: () {
-                                          taskreasoncontroller.clear();
-                                          Navigator.pop(context);
-                                        },
-                                        child: Padding(
-                                          padding: EdgeInsets.fromLTRB(
-                                              MediaQuery.of(context)
+                            ),
+                            Spacer(),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          elevation: 5.0,
+                                          shape: StadiumBorder(),
+                                          primary: Colors.black),
+                                      onPressed: () {
+                                        taskreasoncontroller.clear();
+                                        Navigator.pop(context);
+                                      },
+                                      child: Padding(
+                                        padding: EdgeInsets.fromLTRB(
+                                            MediaQuery.of(context).size.height *
+                                                0.04,
+                                            12,
+                                            MediaQuery.of(context).size.height *
+                                                0.04,
+                                            12),
+                                        child: Text(
+                                          'Close',
+                                          style: GoogleFonts.lato(
+                                              color: Colors.white,
+                                              fontSize: MediaQuery.of(context)
                                                       .size
                                                       .height *
-                                                  0.0375,
-                                              10,
-                                              MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  0.0375,
-                                              10),
-                                          child: Text(
-                                            'Close',
-                                            style: GoogleFonts.lato(
-                                                color: Colors.white,
-                                                fontSize: MediaQuery.of(context)
-                                                        .size
-                                                        .height *
-                                                    0.02),
-                                          ),
-                                        )),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(15.0),
-                                    child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                            elevation: 5.0,
-                                            shape: StadiumBorder(),
-                                            primary: Colors.black),
-                                        onPressed: () async {
-                                          setState(() {
-                                            status = 2;
-                                            reason = taskreasoncontroller.text;
-                                          });
+                                                  0.02),
+                                        ),
+                                      )),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          elevation: 5.0,
+                                          shape: StadiumBorder(),
+                                          primary: Colors.black),
+                                      onPressed: () async {
+                                        setState(() {
+                                          status = 2;
+                                          reason = taskreasoncontroller.text;
+                                        });
 
-                                          ///todo:accept to be work
-                                          if (document != null) {
-                                            await FirebaseTask.updateTask(
-                                                    admindb: document['admin'],
-                                                    categorydb:
-                                                        document['category'],
-                                                    titledb: document['title'],
-                                                    descriptiondb:
-                                                        document['description'],
-                                                    startdatedb:
-                                                        document['startdate'],
-                                                    enddatedb:
-                                                        document['enddate'],
-                                                    duedatedb:
-                                                        document['duedate'],
-                                                    duetimedb:
-                                                        document['duetime'],
-                                                    facultydb:
-                                                        document['faculty'],
-                                                    statusdb: status,
-                                                    reasondb: reason,
-                                                    docId: document.id)
-                                                .whenComplete(
-                                              () => Navigator.pop(context),
-                                            );
-                                            print(document['category']);
-                                            print(document['title']);
-                                            print(document['description']);
-                                            print(document['startdate']);
-                                            print(document['enddate']);
-                                            print(document['duedate']);
-                                            print(document['faculty']);
-                                            print(document['status']);
-                                            print(document['reason']);
-                                            print('Rejected !');
-                                            taskreasoncontroller.clear();
-                                          }
-                                        },
-                                        child: Padding(
-                                          padding: EdgeInsets.fromLTRB(
-                                              MediaQuery.of(context)
+                                        ///todo:accept to be work
+                                        if (document != null) {
+                                          showDialog(
+                                              context: context,
+                                              builder: (_) =>
+                                                  SpinKitFoldingCube(
+                                                    color: Colors.black,
+                                                  ));
+                                          await FirebaseTask.updateTask(
+                                                  admindb: document['admin'],
+                                                  categorydb:
+                                                      document['category'],
+                                                  titledb: document['title'],
+                                                  descriptiondb:
+                                                      document['description'],
+                                                  startdatedb:
+                                                      document['startdate'],
+                                                  enddatedb:
+                                                      document['enddate'],
+                                                  duedatedb:
+                                                      document['duedate'],
+                                                  duetimedb:
+                                                      document['duetime'],
+                                                  facultydb:
+                                                      document['faculty'],
+                                                  statusdb: status,
+                                                  reasondb: reason,
+                                                  docId: document.id)
+                                              .whenComplete(
+                                            () => Navigator.pop(context),
+                                          );
+                                          Navigator.pop(context);
+                                          print(document['category']);
+                                          print(document['title']);
+                                          print(document['description']);
+                                          print(document['startdate']);
+                                          print(document['enddate']);
+                                          print(document['duedate']);
+                                          print(document['faculty']);
+                                          print(document['status']);
+                                          print(document['reason']);
+                                          print('Rejected !');
+                                          taskreasoncontroller.clear();
+                                        }
+                                      },
+                                      child: Padding(
+                                        padding: EdgeInsets.fromLTRB(
+                                            MediaQuery.of(context).size.height *
+                                                0.04,
+                                            12,
+                                            MediaQuery.of(context).size.height *
+                                                0.04,
+                                            12),
+                                        child: Text(
+                                          'Done',
+                                          style: GoogleFonts.lato(
+                                              color: Colors.white,
+                                              fontSize: MediaQuery.of(context)
                                                       .size
                                                       .height *
-                                                  0.04,
-                                              12,
-                                              MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  0.04,
-                                              12),
-                                          child: Text(
-                                            'Done',
-                                            style: GoogleFonts.lato(
-                                                color: Colors.white,
-                                                fontSize: MediaQuery.of(context)
-                                                        .size
-                                                        .height *
-                                                    0.02),
-                                          ),
-                                        )),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ))),
+                                                  0.02),
+                                        ),
+                                      )),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ))),
           ),
         ),
       ),
