@@ -1031,8 +1031,7 @@ class adminpageState extends State<adminpage> {
                                                                   0.04),
                                                         ),
                                                       ),
-                                                      (pageview == 1)
-                                                          ? Column(
+                                                       Column(
                                                               children: [
                                                                 standardtext(
                                                                     text: document[
@@ -1041,9 +1040,6 @@ class adminpageState extends State<adminpage> {
                                                                         .red),
                                                               ],
                                                             )
-                                                          : SizedBox(
-                                                              height: 0,
-                                                            ),
                                                     ],
                                                   )
                                                 ],
@@ -1140,7 +1136,6 @@ class adminpageState extends State<adminpage> {
 }
 
 Widget _floating(BuildContext context) {
-  if (pageview == 1) {
     return FloatingActionButton(
       backgroundColor: Colors.black,
       onPressed: () {
@@ -1149,9 +1144,6 @@ Widget _floating(BuildContext context) {
       },
       child: const Icon(Icons.add),
     );
-  } else {
-    return Container();
-  }
 }
 
 class FunkyOverlay extends StatefulWidget {
