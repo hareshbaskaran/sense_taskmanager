@@ -22,7 +22,7 @@ Color bb = Color(0xFFADA4A5);
 Color b = Color(0xFF817B7C);
 TextEditingController taskreasoncontroller = new TextEditingController();
 TextEditingController taskreasonblah = new TextEditingController();
-TextEditingController reasonpop=new TextEditingController();
+TextEditingController reasonpop = new TextEditingController();
 int _selectedIndex = 0;
 Future<int>? tasklength;
 int todaytasks = 0;
@@ -34,8 +34,6 @@ class adminpage extends StatefulWidget {
 }
 
 class adminpageState extends State<adminpage> {
-
-
   Widget build(BuildContext context) {
     void _onItemTapped(int index) {
       setState(() {
@@ -103,8 +101,9 @@ class adminpageState extends State<adminpage> {
                               children: [
                                 IconButton(
                                     onPressed: () async {
-                                      User? user = await Authentication.signInWithGoogle(
-                                          context: context);
+                                      User? user =
+                                          await Authentication.signInWithGoogle(
+                                              context: context);
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
@@ -147,205 +146,234 @@ class adminpageState extends State<adminpage> {
                         ),
                         Column(
                           children: [
-
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Container(
-                                height: MediaQuery.of(context).size.height * 0.5,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.5,
                                 decoration: new BoxDecoration(
                                   color: Colors.white,
                                   shape: BoxShape.rectangle,
                                   border: Border.all(width: 1.0),
-                                  borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(15.0)),
                                 ),
                                 child: Padding(
                                   padding: const EdgeInsets.all(10),
                                   child: StreamBuilder(
                                       stream: AdminQuery.TodayTasks(),
                                       builder: (BuildContext context,
-                                          AsyncSnapshot<QuerySnapshot> snapshot) {
+                                          AsyncSnapshot<QuerySnapshot>
+                                              snapshot) {
                                         if (!snapshot.hasData) {
-
                                           return Center(
                                             child: CircularProgressIndicator(
                                               color: Colors.deepPurpleAccent,
                                             ),
                                           );
                                         }
-                                        todaytasks =
-                                            snapshot.data!.docs.length;
+                                        todaytasks = snapshot.data!.docs.length;
                                         return ListView(
                                           shrinkWrap: true,
-                                          children: snapshot.data!.docs.map((document) {
+                                          children: snapshot.data!.docs
+                                              .map((document) {
                                             return Padding(
-                                              padding: EdgeInsets.fromLTRB(6, 0, 6, 8),
+                                              padding: EdgeInsets.fromLTRB(
+                                                  6, 0, 6, 8),
                                               child: Dismissible(
                                                 key: UniqueKey(),
                                                 background: Container(
                                                   decoration: new BoxDecoration(
-                                                    color: Theme.of(context).errorColor,
+                                                    color: Theme.of(context)
+                                                        .errorColor,
                                                     shape: BoxShape.rectangle,
-                                                    borderRadius: BorderRadius.all(
-                                                        Radius.circular(15.0)),
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                15.0)),
                                                   ),
                                                   child: Icon(
                                                     Icons.delete,
                                                     color: Colors.white,
                                                     size: 35,
                                                   ),
-                                                  alignment: Alignment.centerLeft,
-                                                  padding: EdgeInsets.only(left: 20),
+                                                  alignment:
+                                                      Alignment.centerLeft,
+                                                  padding:
+                                                      EdgeInsets.only(left: 20),
                                                   margin: EdgeInsets.symmetric(
-                                                      horizontal: 15, vertical: 8),
+                                                      horizontal: 15,
+                                                      vertical: 8),
                                                 ),
                                                 secondaryBackground: Container(
                                                   decoration: new BoxDecoration(
                                                     color: Colors.green,
                                                     shape: BoxShape.rectangle,
-                                                    borderRadius: BorderRadius.all(
-                                                        Radius.circular(15.0)),
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                15.0)),
                                                   ),
                                                   child: Icon(
                                                     Icons.edit,
                                                     color: Colors.white,
                                                     size: 35,
                                                   ),
-                                                  alignment: Alignment.centerRight,
-                                                  padding: EdgeInsets.only(right: 20),
+                                                  alignment:
+                                                      Alignment.centerRight,
+                                                  padding: EdgeInsets.only(
+                                                      right: 20),
                                                   margin: EdgeInsets.symmetric(
-                                                      horizontal: 15, vertical: 8),
+                                                      horizontal: 15,
+                                                      vertical: 8),
                                                 ),
                                                 onDismissed: (direction) async {
                                                   if (direction ==
-                                                      DismissDirection.endToStart) {
+                                                      DismissDirection
+                                                          .endToStart) {
                                                     setState(() {
-                                                      checkInserttask = "Update";
+                                                      checkInserttask =
+                                                          "Update";
                                                     });
                                                     print('Updating UI');
                                                     adminreasoncontroller.text =
-                                                    document['admin'];
+                                                        document['admin'];
                                                     categoryvalue =
-                                                    document['category'];
+                                                        document['category'];
                                                     tasktitlecontroller.text =
-                                                    document['title'];
-                                                    taskdescriptioncontroller.text =
-                                                    document['description'];
+                                                        document['title'];
+                                                    taskdescriptioncontroller
+                                                            .text =
+                                                        document['description'];
                                                     startDateInString =
-                                                    document['startdate'];
+                                                        document['startdate'];
                                                     endDateInString =
-                                                    document['enddate'];
+                                                        document['enddate'];
                                                     dueDateInString =
-                                                    document['duedate'];
-                                                    duetime = document['duetime'];
-                                                    facultyvalue = document['faculty'];
+                                                        document['duedate'];
+                                                    duetime =
+                                                        document['duetime'];
+                                                    facultyvalue =
+                                                        document['faculty'];
                                                     checkInserttask = "Update";
 
                                                     Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                            builder: (BuildContext
-                                                            context) {
-                                                              return taskassign_a();
-                                                            },
-                                                            settings: RouteSettings(
-                                                                arguments:
-                                                                document)))
+                                                            context,
+                                                            MaterialPageRoute(
+                                                                builder:
+                                                                    (BuildContext
+                                                                        context) {
+                                                                  return taskassign_a();
+                                                                },
+                                                                settings: RouteSettings(
+                                                                    arguments:
+                                                                        document)))
                                                         .then((value) {
                                                       setState(() {});
                                                     });
                                                   } else {
                                                     print(document.id);
 
-                                                    await FirebaseTask.deleteTask(
-                                                        docId: document.id);
+                                                    await FirebaseTask
+                                                        .deleteTask(
+                                                            docId: document.id);
                                                     setState(() {});
                                                   }
                                                 },
                                                 child: Align(
-                                                    child: Stack(children: <Widget>[
+                                                    child: Stack(
+                                                        children: <Widget>[
                                                       Container(
-                                                        decoration: new BoxDecoration(
+                                                        decoration:
+                                                            new BoxDecoration(
                                                           color: Colors.white,
-                                                          shape: BoxShape.rectangle,
-                                                          border: Border.all(width: 2.0),
-                                                          borderRadius: BorderRadius.all(
-                                                              Radius.circular(15.0)),
+                                                          shape: BoxShape
+                                                              .rectangle,
+                                                          border: Border.all(
+                                                              width: 2.0),
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          15.0)),
                                                         ),
                                                         child: Card(
                                                           elevation: 0,
                                                           color: Colors.white,
-                                                          child: RoundedExpansionTile(
-                                                            rotateTrailing: false,
+                                                          child:
+                                                              RoundedExpansionTile(
+                                                            rotateTrailing:
+                                                                false,
                                                             trailing: Column(
                                                               mainAxisAlignment:
-                                                              MainAxisAlignment.end,
+                                                                  MainAxisAlignment
+                                                                      .end,
                                                               crossAxisAlignment:
-                                                              CrossAxisAlignment.end,
+                                                                  CrossAxisAlignment
+                                                                      .end,
                                                               children: [
                                                                 Icon(
                                                                   Icons
                                                                       .arrow_drop_down_outlined,
-                                                                  color: Colors.black,
+                                                                  color: Colors
+                                                                      .black,
                                                                 ),
                                                               ],
                                                             ),
                                                             shape: RoundedRectangleBorder(
                                                                 borderRadius:
-                                                                BorderRadius.circular(
-                                                                    4)),
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4)),
                                                             title: Column(
                                                               mainAxisAlignment:
-                                                              MainAxisAlignment.start,
+                                                                  MainAxisAlignment
+                                                                      .start,
                                                               crossAxisAlignment:
-                                                              CrossAxisAlignment.start,
+                                                                  CrossAxisAlignment
+                                                                      .start,
                                                               children: [
                                                                 largetext(
-                                                                    text:
-                                                                    document['title']),
+                                                                    text: document[
+                                                                        'title']),
                                                                 standardtext(
                                                                   text:
-                                                                  "${document['faculty']}",
-                                                                  c: Color(0xff555556),
+                                                                      "${document['faculty']}",
+                                                                  c: Color(
+                                                                      0xff555556),
                                                                 ),
                                                                 standardtext(
                                                                   text:
-                                                                  "${document['startdate']} - ${document['enddate']}",
-                                                                  c: Color(0xff555556),
+                                                                      "${document['startdate']} - ${document['enddate']}",
+                                                                  c: Color(
+                                                                      0xff555556),
                                                                 ),
                                                                 Padding(
-                                                                  padding:
-                                                                  const EdgeInsets.only(
-                                                                      left: 10.0),
+                                                                  padding: const EdgeInsets
+                                                                          .only(
+                                                                      left:
+                                                                          10.0),
                                                                   child: Column(
                                                                     mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .start,
+                                                                        MainAxisAlignment
+                                                                            .start,
                                                                     crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .start,
+                                                                        CrossAxisAlignment
+                                                                            .start,
                                                                     children: [
                                                                       Row(
                                                                         mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .start,
+                                                                            MainAxisAlignment.start,
                                                                         crossAxisAlignment:
-                                                                        CrossAxisAlignment
-                                                                            .center,
+                                                                            CrossAxisAlignment.center,
                                                                         children: [
                                                                           SizedBox(
-                                                                              width: MediaQuery.of(
-                                                                                  context)
-                                                                                  .size
-                                                                                  .width *
-                                                                                  0.15),
+                                                                              width: MediaQuery.of(context).size.width * 0.15),
                                                                         ],
                                                                       ),
                                                                       SizedBox(
-                                                                          height: MediaQuery.of(
-                                                                              context)
-                                                                              .size
-                                                                              .width *
-                                                                              0.01),
+                                                                          height:
+                                                                              MediaQuery.of(context).size.width * 0.01),
                                                                     ],
                                                                   ),
                                                                 )
@@ -354,75 +382,75 @@ class adminpageState extends State<adminpage> {
                                                             children: [
                                                               Column(
                                                                 mainAxisAlignment:
-                                                                MainAxisAlignment.start,
-                                                                crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                                children: [
-                                                                  SizedBox(height: 20),
-                                                                  Row(
-                                                                    mainAxisAlignment:
                                                                     MainAxisAlignment
                                                                         .start,
-                                                                    crossAxisAlignment:
+                                                                crossAxisAlignment:
                                                                     CrossAxisAlignment
                                                                         .start,
+                                                                children: [
+                                                                  SizedBox(
+                                                                      height:
+                                                                          20),
+                                                                  Row(
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .start,
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
                                                                     children: [
                                                                       standardtext(
                                                                           text:
-                                                                          'Category :  ',
+                                                                              'Category :  ',
                                                                           c: bb),
                                                                       standardtext(
                                                                           text:
-                                                                          '${document['category']}',
-                                                                          c: Color(0xff555556))
+                                                                              '${document['category']}',
+                                                                          c: Color(
+                                                                              0xff555556))
                                                                     ],
                                                                   ),
                                                                   SizedBox(
-                                                                      height: MediaQuery.of(
-                                                                          context)
-                                                                          .size
-                                                                          .height *
+                                                                      height: MediaQuery.of(context)
+                                                                              .size
+                                                                              .height *
                                                                           0.01),
                                                                   standardtext(
                                                                       text:
-                                                                      'Event Description:',
+                                                                          'Event Description:',
                                                                       c: bb),
                                                                   Padding(
-                                                                    padding:
-                                                                    const EdgeInsets
-                                                                        .all(10.0),
+                                                                    padding: const EdgeInsets
+                                                                            .all(
+                                                                        10.0),
                                                                     child: Text(
                                                                       document[
-                                                                      'description'],
+                                                                          'description'],
                                                                       textAlign:
-                                                                      TextAlign.left,
+                                                                          TextAlign
+                                                                              .left,
                                                                       style: GoogleFonts.poppins(
-                                                                          color:
-                                                                          Colors.black,
-                                                                          fontWeight:
-                                                                          FontWeight
+                                                                          color: Colors
+                                                                              .black,
+                                                                          fontWeight: FontWeight
                                                                               .bold,
-                                                                          fontSize: MediaQuery.of(
-                                                                              context)
-                                                                              .size
-                                                                              .width *
-                                                                              0.04),
+                                                                          fontSize:
+                                                                              MediaQuery.of(context).size.width * 0.04),
                                                                     ),
                                                                   ),
-                                                                  (pageview == 1)
+                                                                  (pageview ==
+                                                                          1)
                                                                       ? Column(
-                                                                    children: [
-                                                                      standardtext(
-                                                                          text: document[
-                                                                          'admin'],
-                                                                          c: Colors
-                                                                              .red),
-                                                                    ],
-                                                                  )
+                                                                          children: [
+                                                                            standardtext(
+                                                                                text: document['admin'],
+                                                                                c: Colors.red),
+                                                                          ],
+                                                                        )
                                                                       : SizedBox(
-                                                                    height: 0,
-                                                                  ),
+                                                                          height:
+                                                                              0,
+                                                                        ),
                                                                 ],
                                                               )
                                                             ],
@@ -431,76 +459,92 @@ class adminpageState extends State<adminpage> {
                                                       ),
                                                       (document['status'] == 0)
                                                           ? StatusTag(
-                                                          Colors.black, 'Assigned')
-                                                          : (document['status'] == 1)
-                                                          ? StatusTag(
-                                                          Colors.green, 'Accepted')
-                                                          : (document['status'] == 2)
-                                                          ? StatusTag(
-                                                          Colors.redAccent,
-                                                          'Rejected')
+                                                              Colors.black,
+                                                              'Assigned')
                                                           : (document['status'] ==
-                                                          3)
-                                                          ? StatusTag(
-                                                          Colors
-                                                              .deepOrangeAccent,
-                                                          'Overdue')
-                                                          : SizedBox(),
+                                                                  1)
+                                                              ? StatusTag(
+                                                                  Colors.green,
+                                                                  'Accepted')
+                                                              : (document['status'] ==
+                                                                      2)
+                                                                  ? StatusTag(
+                                                                      Colors
+                                                                          .redAccent,
+                                                                      'Rejected')
+                                                                  : (document['status'] ==
+                                                                          3)
+                                                                      ? StatusTag(
+                                                                          Colors
+                                                                              .deepOrangeAccent,
+                                                                          'Overdue')
+                                                                      : SizedBox(),
                                                       (document['admin'] == "")
                                                           ? Align(
-                                                        alignment:
-                                                        Alignment.bottomRight,
-                                                        child: Padding(
-                                                          padding:
-                                                          const EdgeInsets.only(
-                                                              top: 80.0,
-                                                              right: 10),
-                                                          child: InkWell(
-                                                            onTap: () {
-                                                              setState(() {
-                                                                showDialog(
-                                                                  routeSettings:
-                                                                  RouteSettings(arguments: document),
-                                                                  context: context,
-                                                                  builder: (_) =>
-                                                                      FunkyOverlayAdminReject(),
-                                                                );
-                                                              });
-                                                            },
-                                                            child: Icon(
-                                                              Icons.recommend_rounded,
-                                                              color: Colors.red,
-                                                              size: MediaQuery.of(
-                                                                  context)
-                                                                  .size
-                                                                  .width *
-                                                                  0.1,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      )
+                                                              alignment: Alignment
+                                                                  .bottomRight,
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .only(
+                                                                        top:
+                                                                            80.0,
+                                                                        right:
+                                                                            10),
+                                                                child: InkWell(
+                                                                  onTap: () {
+                                                                    setState(
+                                                                        () {
+                                                                      showDialog(
+                                                                        routeSettings:
+                                                                            RouteSettings(arguments: document),
+                                                                        context:
+                                                                            context,
+                                                                        builder:
+                                                                            (_) =>
+                                                                                FunkyOverlayAdminReject(),
+                                                                      );
+                                                                    });
+                                                                  },
+                                                                  child: Icon(
+                                                                    Icons
+                                                                        .recommend_rounded,
+                                                                    color: Colors
+                                                                        .red,
+                                                                    size: MediaQuery.of(context)
+                                                                            .size
+                                                                            .width *
+                                                                        0.1,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            )
                                                           : Align(
-                                                        alignment:
-                                                        Alignment.bottomRight,
-                                                        child: Padding(
-                                                          padding:
-                                                          const EdgeInsets.only(
-                                                              top: 80.0,
-                                                              right: 10),
-                                                          child: InkWell(
-                                                            onTap: () {},
-                                                            child: Icon(
-                                                              Icons.recommend_rounded,
-                                                              color: Colors.green,
-                                                              size: MediaQuery.of(
-                                                                  context)
-                                                                  .size
-                                                                  .width *
-                                                                  0.1,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      )
+                                                              alignment: Alignment
+                                                                  .bottomRight,
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .only(
+                                                                        top:
+                                                                            80.0,
+                                                                        right:
+                                                                            10),
+                                                                child: InkWell(
+                                                                  onTap: () {},
+                                                                  child: Icon(
+                                                                    Icons
+                                                                        .recommend_rounded,
+                                                                    color: Colors
+                                                                        .green,
+                                                                    size: MediaQuery.of(context)
+                                                                            .size
+                                                                            .width *
+                                                                        0.1,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            )
                                                     ])),
                                               ),
                                             );
@@ -512,7 +556,7 @@ class adminpageState extends State<adminpage> {
                             )
                           ],
                         ),
-                        SizedBox(height:30),
+                        SizedBox(height: 30),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(15, 0, 15, 10),
                           child: Row(
@@ -541,8 +585,8 @@ class adminpageState extends State<adminpage> {
                                             0.045),
                               ),
                               SizedBox(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.025),
+                                  width: MediaQuery.of(context).size.width *
+                                      0.025),
                               (adminquery == 6)
                                   ? Center(
                                       child: GestureDetector(
@@ -951,7 +995,8 @@ class adminpageState extends State<adminpage> {
                                                           standardtext(
                                                               text:
                                                                   '${document['category']}',
-                                                              c: Color(0xff555556))
+                                                              c: Color(
+                                                                  0xff555556))
                                                         ],
                                                       ),
                                                       SizedBox(
@@ -1036,7 +1081,9 @@ class adminpageState extends State<adminpage> {
                                                         setState(() {
                                                           showDialog(
                                                             routeSettings:
-                                                            RouteSettings(arguments: document),
+                                                                RouteSettings(
+                                                                    arguments:
+                                                                        document),
                                                             context: context,
                                                             builder: (_) =>
                                                                 FunkyOverlayAdminReject(),
@@ -1317,7 +1364,7 @@ class _StatusTagState extends State<StatusTag> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(right: 20, top: 20),
+      padding: const EdgeInsets.only(right: 20, top: 10),
       alignment: Alignment.topRight,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
@@ -1346,6 +1393,7 @@ class _StatusTagState extends State<StatusTag> {
     );
   }
 }
+
 class FunkyOverlayAdminReject extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => FunkyOverlayAdminRejectState();
@@ -1375,7 +1423,7 @@ class FunkyOverlayAdminRejectState extends State<FunkyOverlayAdminReject>
   @override
   Widget build(BuildContext context) {
     QueryDocumentSnapshot? document =
-    ModalRoute.of(context)!.settings.arguments as QueryDocumentSnapshot?;
+        ModalRoute.of(context)!.settings.arguments as QueryDocumentSnapshot?;
     return Center(
       child: Material(
         color: Colors.transparent,
@@ -1403,7 +1451,7 @@ class FunkyOverlayAdminRejectState extends State<FunkyOverlayAdminReject>
                               color: Colors.black,
                               fontWeight: FontWeight.w500,
                               fontSize:
-                              MediaQuery.of(context).size.width * 0.02),
+                                  MediaQuery.of(context).size.width * 0.02),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(10.0),
@@ -1414,8 +1462,7 @@ class FunkyOverlayAdminRejectState extends State<FunkyOverlayAdminReject>
                               hintStyle: GoogleFonts.poppins(
                                   color: Colors.black,
                                   fontWeight: FontWeight.w200,
-                                  fontSize:
-                                  MediaQuery.of(context).size.width *
+                                  fontSize: MediaQuery.of(context).size.width *
                                       0.032),
                             ),
                             keyboardType: TextInputType.text,
@@ -1449,8 +1496,8 @@ class FunkyOverlayAdminRejectState extends State<FunkyOverlayAdminReject>
                                       style: GoogleFonts.lato(
                                           color: Colors.white,
                                           fontSize: MediaQuery.of(context)
-                                              .size
-                                              .height *
+                                                  .size
+                                                  .height *
                                               0.02),
                                     ),
                                   )),
@@ -1462,31 +1509,25 @@ class FunkyOverlayAdminRejectState extends State<FunkyOverlayAdminReject>
                                       elevation: 5.0,
                                       shape: StadiumBorder(),
                                       primary: Colors.black),
-                                  onPressed: () async{
+                                  onPressed: () async {
                                     if (document != null) {
                                       await FirebaseTask.updateTask(
-                                          admindb: reasonpop.text,
-                                          categorydb:
-                                          document['category'],
-                                          titledb: document['title'],
-                                          descriptiondb:
-                                          document['description'],
-                                          startdatedb:
-                                          document['startdate'],
-                                          enddatedb:
-                                          document['enddate'],
-                                          duedatedb:
-                                          document['duedate'],
-                                          duetimedb:
-                                          document['duetime'],
-                                          facultydb:
-                                          document
-                                          ['faculty'],
-                                          statusdb: document['status'],
-                                          reasondb: document['reason'],
-                                          docId: document.id)
+                                              admindb: reasonpop.text,
+                                              categorydb: document['category'],
+                                              titledb: document['title'],
+                                              descriptiondb:
+                                                  document['description'],
+                                              startdatedb:
+                                                  document['startdate'],
+                                              enddatedb: document['enddate'],
+                                              duedatedb: document['duedate'],
+                                              duetimedb: document['duetime'],
+                                              facultydb: document['faculty'],
+                                              statusdb: document['status'],
+                                              reasondb: document['reason'],
+                                              docId: document.id)
                                           .whenComplete(
-                                            () => Navigator.pop(context),
+                                        () => Navigator.pop(context),
                                       );
                                       reasonpop.clear();
                                     }
@@ -1504,8 +1545,8 @@ class FunkyOverlayAdminRejectState extends State<FunkyOverlayAdminReject>
                                       style: GoogleFonts.lato(
                                           color: Colors.white,
                                           fontSize: MediaQuery.of(context)
-                                              .size
-                                              .height *
+                                                  .size
+                                                  .height *
                                               0.02),
                                     ),
                                   )),
