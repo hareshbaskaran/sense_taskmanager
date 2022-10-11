@@ -80,7 +80,7 @@ class _userpageState extends State<userpage> {
                   children: [
                     IconButton(
                         onPressed: () async {
-                          User? user = await signInWithGoogle(context: context);
+                          User? user = await Authentication.signInWithGoogle(context: context);
                           Navigator.push(
                             context,
                             MaterialPageRoute(

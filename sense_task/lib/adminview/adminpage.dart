@@ -103,7 +103,7 @@ class adminpageState extends State<adminpage> {
                               children: [
                                 IconButton(
                                     onPressed: () async {
-                                      User? user = await signInWithGoogle(
+                                      User? user = await Authentication.signInWithGoogle(
                                           context: context);
                                       Navigator.push(
                                         context,
