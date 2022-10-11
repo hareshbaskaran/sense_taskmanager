@@ -707,7 +707,7 @@ class _taskassign_aState extends State<taskassign_a> {
                                       duetimedb: duetime,
                                       facultydb: facultyvalue,
                                       statusdb: document['status'],
-                                      reasondb: reason,
+                                      reasondb: document['reason'],
                                       admindb: adminreasoncontroller.text,
                                       docId: document!.id)
                                   .whenComplete(
