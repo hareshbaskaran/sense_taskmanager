@@ -12,7 +12,18 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 List<String> faculty_list = [
   'S.Anand',
-  'T.Yuvaraj'
+  'J.Babu',
+  'G.Balasubramani',
+  'T.Devarajan',
+  'A.Deepa',
+  'R.Durairaj',
+  'D.Gasper',
+  'S.Harikrishnan',
+  'S.Karthikeyan',
+  'P.Narayanasamy',
+  'M.Sreenivasulu',
+  'E.Tamizharasan',
+  'T.Yuvaraj',
 ];
 String facultyvalue = "S.Anand";
 String hive_page ="";
@@ -62,6 +73,7 @@ class Authentication {
         ),
       );
     }
+
     return firebaseApp;
   }
 
@@ -146,8 +158,22 @@ class _loginpageState extends State<loginpage> {
     // TODO: implement initState
     super.initState();
     createOpenBox();
+    FutureBuilder(
+      future: Authentication.initializeFirebase(context: context),
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return Text('Error initializing Firebase');
+        } else if (snapshot.connectionState == ConnectionState.done) {
+          return SizedBox();
+        }
+        return CircularProgressIndicator(
+          valueColor: AlwaysStoppedAnimation<Color>(Colors.black),
+        );
+      },
+    );
   }
-  void createOpenBox()async{
+
+  void createOpenBox() async {
     box1 = await Hive.openBox('myBox');
     getdata();
   }
@@ -183,8 +209,8 @@ class _loginpageState extends State<loginpage> {
     Hive_box = widget.box;
 
     return Scaffold(
-        resizeToAvoidBottomInset: false,
         body: SafeArea(
+      child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.fromLTRB(10, 20, 10, 10),
             child: Column(
@@ -198,7 +224,7 @@ class _loginpageState extends State<loginpage> {
                     if (snapshot.hasError) {
                       return Text('Error initializing Firebase');
                     } else if (snapshot.connectionState == ConnectionState.done) {
-                      return Center();
+                      return SizedBox();
                     }
                     return CircularProgressIndicator(
                       valueColor: AlwaysStoppedAnimation<Color>(
@@ -591,6 +617,7 @@ class _loginpageState extends State<loginpage> {
               ],
             ),
           ),
+      ),
         ));
   }
 

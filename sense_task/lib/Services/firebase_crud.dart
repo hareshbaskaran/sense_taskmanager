@@ -18,7 +18,7 @@ class FirebaseCrud {
 
     Map<String, dynamic> data = <String, dynamic>{"username": username};
 
-     await documentReferencer.set(data).whenComplete(() {
+    await documentReferencer.set(data).whenComplete(() {
       response.code = 200;
       response.message = "Sucessfully added to the database";
     }).catchError((e) {
@@ -48,11 +48,10 @@ class FirebaseTask {
       required String duedatedb,
       required String duetimedb,
       required String facultydb,
-        required String admindb,
-        required String todaydatedb,
+      required String admindb,
+      required String todaydatedb,
       required int statusdb,
-      required String reasondb}
-      ) async {
+      required String reasondb}) async {
     Response response = Response();
     DocumentReference documentReferencer = _taskCollection.doc();
 
@@ -67,8 +66,8 @@ class FirebaseTask {
       "faculty": facultydb,
       "status": statusdb,
       "reason": reasondb,
-      "admin":admindb,
-      "today":todaydatedb
+      "admin": admindb,
+      "today": todaydatedb
     };
 
     var result = await documentReferencer.set(data).whenComplete(() {
@@ -88,7 +87,6 @@ class FirebaseTask {
     return notesItemCollection.snapshots();
   }
 
-
   static Future<List<QuerySnapshot<Object?>>> DropdownFaculty() {
     CollectionReference notesItemCollection = _taskCollection;
     return notesItemCollection
@@ -104,8 +102,7 @@ class FirebaseTask {
 
   ///edit
   static Future<Response> updateTask(
-      {
-        required String categorydb,
+      {required String categorydb,
       required String titledb,
       required String descriptiondb,
       required String startdatedb,
@@ -115,7 +112,7 @@ class FirebaseTask {
       required String facultydb,
       required int statusdb,
       required String reasondb,
-        required String admindb,
+      required String admindb,
       required String docId}) async {
     Response response = Response();
     DocumentReference documentReferencer = _taskCollection.doc(docId);
@@ -131,7 +128,7 @@ class FirebaseTask {
       "faculty": facultydb,
       "status": statusdb,
       "reason": reasondb,
-      "admin":admindb
+      "admin": admindb
     };
 
     await documentReferencer.update(data).whenComplete(() {
@@ -163,62 +160,75 @@ class FirebaseTask {
     return response;
   }
 }
-class AdminQuery{
+
+class AdminQuery {
   static Stream<QuerySnapshot> TodayTasks() {
     CollectionReference notesItemCollection = _taskCollection;
     return notesItemCollection
         .where(
-      "today",
-      isEqualTo: todayDateinString,
-    ).snapshots();
+          "today",
+          isEqualTo: todayDateinString,
+        )
+        .snapshots();
   }
 
   static Stream<QuerySnapshot> AdminStatus() {
     CollectionReference notesItemCollection = _taskCollection;
     return notesItemCollection
         .where(
-      "status",
-      isEqualTo: adminquery,
-    ).snapshots();
+          "status",
+          isEqualTo: adminquery,
+        )
+        .snapshots();
   }
+
   static Stream<QuerySnapshot> DateQuery() {
     CollectionReference notesItemCollection = _taskCollection;
     return notesItemCollection
         .where(
-      "startdate",
-      isEqualTo: querydateinstring,
-    ).snapshots();
+          "startdate",
+          isEqualTo: querydateinstring,
+        )
+        .snapshots();
   }
+
   static Stream<QuerySnapshot> FacultyQuery() {
     CollectionReference notesItemCollection = _taskCollection;
     return notesItemCollection
         .where(
-      "faculty",
-      isEqualTo: queryfaculty,
-    ).snapshots();
+          "faculty",
+          isEqualTo: queryfaculty,
+        )
+        .snapshots();
   }
 }
-class UsernameQuery{
+
+class UsernameQuery {
   static Stream<QuerySnapshot> UserOngoing() {
     CollectionReference notesItemCollection = _taskCollection;
     return notesItemCollection
         .where(
-      "status",
-      isEqualTo: 0,
-    ).where("faculty",
-      ///todo:change my name to stringfield catches username
-      isEqualTo: user_hive
-    ).snapshots();
+          "status",
+          isEqualTo: 0,
+        )
+        .where("faculty",
+
+            ///todo:change my name to stringfield catches username
+            isEqualTo: user_hive)
+        .snapshots();
   }
+
   static Stream<QuerySnapshot> UserAccepted() {
     CollectionReference notesItemCollection = _taskCollection;
     return notesItemCollection
         .where(
-      "status",
-      isEqualTo: 1,
-    ).where("faculty",
-        ///todo:change my name to stringfield catches username
-        isEqualTo: user_hive
-    ).snapshots();
+          "status",
+          isEqualTo: 1,
+        )
+        .where("faculty",
+
+            ///todo:change my name to stringfield catches username
+            isEqualTo: user_hive)
+        .snapshots();
   }
 }
