@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:sense_task/adminview/admin_facultypage.dart';
@@ -71,7 +72,12 @@ class Authentication {
         MaterialPageRoute(
           builder: (context) => (pageview==1)?adminpage():userpage(user_box),
         ),
-      );
+      ).onError((error, stackTrace) => showDialog(
+          context: context,
+          builder: (_) => SpinKitFoldingCube(
+            color: Colors.black,
+          )))
+      ;
     }
 
     return firebaseApp;

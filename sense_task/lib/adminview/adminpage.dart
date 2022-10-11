@@ -562,9 +562,17 @@ class adminpageState extends State<adminpage> {
                                                                               child: Text(
                                                                                 "Due on : " + "${document['duedate']},  ${document['duetime']}",
                                                                                 textAlign: TextAlign.left,
-                                                                                style: GoogleFonts.poppins(color: Colors.black, fontWeight: FontWeight.w600, fontSize: MediaQuery.of(context).size.width * 0.035),
+                                                                                style: GoogleFonts.poppins(color: Colors.redAccent, fontWeight: FontWeight.w600, fontSize: MediaQuery.of(context).size.width * 0.035),
                                                                               ),
                                                                             ),
+                                                                          Container(
+                                                                            padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+                                                                            child: Text(
+                                                                              "${document['admin']}",
+                                                                              textAlign: TextAlign.left,
+                                                                              style: GoogleFonts.poppins(color: Colors.redAccent, fontWeight: FontWeight.w600, fontSize: MediaQuery.of(context).size.width * 0.035),
+                                                                            ),
+                                                                          ),
                                                                         ])
                                                                   ]),
                                                             ),
@@ -592,9 +600,7 @@ class adminpageState extends State<adminpage> {
                                                                               Colors.deepOrangeAccent,
                                                                               'Overdue')
                                                                           : SizedBox(),
-                                                          if (document[
-                                                                  'admin'] ==
-                                                              "")
+                                                          if (document['admin'] == "")
                                                             Align(
                                                               alignment: Alignment
                                                                   .bottomRight,
@@ -1352,7 +1358,7 @@ class adminpageState extends State<adminpage> {
                                                                             .left,
                                                                     style: GoogleFonts.poppins(
                                                                         color: Colors
-                                                                            .black,
+                                                                            .redAccent,
                                                                         fontWeight:
                                                                             FontWeight
                                                                                 .w600,
@@ -1361,6 +1367,14 @@ class adminpageState extends State<adminpage> {
                                                                                 0.035),
                                                                   ),
                                                                 ),
+                                                              Container(
+                                                                padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+                                                                child: Text(
+                                                                  "${document['admin']}",
+                                                                  textAlign: TextAlign.left,
+                                                                  style: GoogleFonts.poppins(color: Colors.redAccent, fontWeight: FontWeight.w600, fontSize: MediaQuery.of(context).size.width * 0.035),
+                                                                ),
+                                                              ),
                                                             ])
                                                       ]),
                                                 ),
@@ -1750,24 +1764,20 @@ class FunkyOverlayAdminRejectState extends State<FunkyOverlayAdminReject>
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            height: 40,
-                            child: TextField(
-                              decoration: InputDecoration(
-                                fillColor: Colors.black,
-                                hintText: 'Type here',
-                                hintStyle: GoogleFonts.poppins(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w200,
-                                    fontSize:
-                                        MediaQuery.of(context).size.width *
-                                            0.032),
-                              ),
-                              keyboardType: TextInputType.text,
-                              maxLines: 2,
-                              cursorColor: Colors.black,
-                              controller: reasonpop,
+                          child: TextField(
+                            decoration: InputDecoration(
+                              fillColor: Colors.black,
+                              hintText: 'Type here',
+                              hintStyle: GoogleFonts.poppins(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w200,
+                                  fontSize:
+                                      MediaQuery.of(context).size.width *
+                                          0.032),
                             ),
+                            keyboardType: TextInputType.text,
+                            cursorColor: Colors.black,
+                            controller: reasonpop,
                           ),
                         ),
                         Spacer(),

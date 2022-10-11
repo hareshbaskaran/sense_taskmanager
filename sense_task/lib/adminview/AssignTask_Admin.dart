@@ -864,24 +864,20 @@ class FunkyOverlayforcategoryState extends State<FunkyOverlayforcategory>
                         ),
                         Padding(
                           padding: const EdgeInsets.all(10.0),
-                          child: Container(
-                            height: 40,
-                            child: TextField(
-                              decoration: InputDecoration(
-                                fillColor: Colors.black,
-                                hintText: 'Type here',
-                                hintStyle: GoogleFonts.poppins(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w200,
-                                    fontSize:
-                                        MediaQuery.of(context).size.width *
-                                            0.032),
-                              ),
-                              keyboardType: TextInputType.text,
-                              maxLines: 2,
-                              cursorColor: Colors.black,
-                              controller: taskcategorycontroller,
+                          child: TextField(
+                            decoration: InputDecoration(
+                              fillColor: Colors.black,
+                              hintText: 'Type here',
+                              hintStyle: GoogleFonts.poppins(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w200,
+                                  fontSize:
+                                      MediaQuery.of(context).size.width *
+                                          0.032),
                             ),
+                            keyboardType: TextInputType.text,
+                            cursorColor: Colors.black,
+                            controller: taskcategorycontroller,
                           ),
                         ),
                         Row(
