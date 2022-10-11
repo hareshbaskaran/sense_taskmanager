@@ -62,7 +62,6 @@ class Authentication {
         ),
       );
     }
-
     return firebaseApp;
   }
 
@@ -199,7 +198,7 @@ class _loginpageState extends State<loginpage> {
                     if (snapshot.hasError) {
                       return Text('Error initializing Firebase');
                     } else if (snapshot.connectionState == ConnectionState.done) {
-                      return SizedBox();
+                      return Center();
                     }
                     return CircularProgressIndicator(
                       valueColor: AlwaysStoppedAnimation<Color>(
