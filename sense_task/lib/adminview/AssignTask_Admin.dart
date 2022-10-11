@@ -34,11 +34,11 @@ var category_list = [
   'CTS office duty',
   'SENSE office duty',
   'Hostel duty',
-  'Placement office duty',
-  'Admissions office duty',
+  'Placement office\n duty',
+  'Admissions office\n duty',
   'SW office duty',
-  'Venue Preparation for VITEEE',
-  'Venue Preparation for TRB/TNPSC exams',
+  'Venue Preparation\n for VITEEE',
+  'Venue Preparation\n for TRB/TNPSC exams',
 ];
 
 String duetime = '';
@@ -165,39 +165,35 @@ class _taskassign_aState extends State<taskassign_a> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
                                 children: [
-                                  Row(
-                                    children: [
-                                      SizedBox(width: 20),
-                                      new DropdownButtonHideUnderline(
-                                        child: DropdownButton(
-                                            icon: Icon(
-                                              Icons.arrow_drop_down,
-                                              color: Colors.white,
-                                              size: 20.09,
-                                            ),
-                                            alignment: Alignment.centerLeft,
-                                            dropdownColor: Colors.black,
-                                            value: categoryvalue,
-                                            items: category_list
-                                                .map((String item) {
-                                              return DropdownMenuItem(
-                                                value: item,
-                                                child: Text(item),
-                                              );
-                                            }).toList(),
-                                            // After selecting the desired option,it will
-                                            // change button value to selected value
-                                            onChanged: (String? newValue) {
-                                              setState(() {
-                                                categoryvalue = newValue!;
-                                              });
-                                            },
-                                            style: GoogleFonts.lato(
-                                              color: Colors.white,
-                                              fontSize: 15,
-                                            )),
-                                      )
-                                    ],
+                                  Container(
+                                    constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.6),
+                                    child: new DropdownButtonHideUnderline(
+                                      child: DropdownButton(
+                                          icon: Icon(
+                                            Icons.arrow_drop_down,
+                                            color: Colors.white,
+                                            size: 20.09,
+                                          ),
+                                          alignment: Alignment.centerLeft,
+                                          dropdownColor: Colors.black,
+                                          value: categoryvalue,
+                                          items: category_list
+                                              .map((String item) {
+                                            return DropdownMenuItem(
+                                              value: item,
+                                              child: Text(item),
+                                            );
+                                          }).toList(),
+                                          onChanged: (String? newValue) {
+                                            setState(() {
+                                              categoryvalue = newValue!;
+                                            });
+                                          },
+                                          style: GoogleFonts.lato(
+                                            color: Colors.white,
+                                            fontSize: 15,
+                                          )),
+                                    ),
                                   ),
                                 ],
                               ),

@@ -224,7 +224,7 @@ class _loginpageState extends State<loginpage> {
                     if (snapshot.hasError) {
                       return Text('Error initializing Firebase');
                     } else if (snapshot.connectionState == ConnectionState.done) {
-                      return SizedBox();
+                      return Container();
                     }
                     return CircularProgressIndicator(
                       valueColor: AlwaysStoppedAnimation<Color>(
@@ -553,23 +553,20 @@ class _loginpageState extends State<loginpage> {
                   )
                       : Padding(
                     padding: const EdgeInsets.all(20.0),
-                    child: Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child:  FutureBuilder(
-                        future: Authentication.initializeFirebase(context: context),
-                        builder: (context, snapshot) {
-                          if (snapshot.hasError) {
-                            return Text('Error initializing Firebase');
-                          } else if (snapshot.connectionState == ConnectionState.done) {
-                            return _googleSignInButton();
-                          }
-                          return CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                                Colors.black
-                            ),
-                          );
-                        },
-                      ),
+                    child: FutureBuilder(
+                      future: Authentication.initializeFirebase(context: context),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasError) {
+                          return Text('Error initializing Firebase');
+                        } else if (snapshot.connectionState == ConnectionState.done) {
+                          return _googleSignInButton();
+                        }
+                        return CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                              Colors.black
+                          ),
+                        );
+                      },
                     ),
                   ),
                   SizedBox(height: 20),
