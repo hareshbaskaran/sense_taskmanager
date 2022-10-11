@@ -346,9 +346,20 @@ class _loginpageState extends State<loginpage> {
                       ],
                     ),
                   )
-                      : Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: _googleSignInButton(),
+                      : FutureBuilder(
+                    future: Authentication.initializeFirebase(context: context),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasError) {
+                        return Text('Error initializing Firebase');
+                      } else if (snapshot.connectionState == ConnectionState.done) {
+                        return _googleSignInButton();
+                      }
+                      return CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                            Colors.black
+                        ),
+                      );
+                    },
                   ),
                   (alertlogin==true&&adminlogin==false)?
                   Padding(
