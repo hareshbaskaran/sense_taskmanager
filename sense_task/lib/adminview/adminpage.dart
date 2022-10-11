@@ -788,7 +788,7 @@ class adminpageState extends State<adminpage> {
                                                 width: MediaQuery.of(context)
                                                         .size
                                                         .width *
-                                                    0.3,
+                                                    0.4,
                                                 child: Column(
                                                   mainAxisSize:
                                                       MainAxisSize.max,
