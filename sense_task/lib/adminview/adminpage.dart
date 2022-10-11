@@ -415,7 +415,7 @@ class adminpageState extends State<adminpage> {
                                                                     children: [
                                                                       standardtext(
                                                                           text: document[
-                                                                          'reason'],
+                                                                          'admin'],
                                                                           c: Colors
                                                                               .red),
                                                                     ],
@@ -1407,24 +1407,20 @@ class FunkyOverlayAdminRejectState extends State<FunkyOverlayAdminReject>
                         ),
                         Padding(
                           padding: const EdgeInsets.all(10.0),
-                          child: Container(
-                            height: 40,
-                            child: TextField(
-                              decoration: InputDecoration(
-                                fillColor: Colors.black,
-                                hintText: 'Type here',
-                                hintStyle: GoogleFonts.poppins(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w200,
-                                    fontSize:
-                                    MediaQuery.of(context).size.width *
-                                        0.032),
-                              ),
-                              keyboardType: TextInputType.text,
-                              maxLines: 2,
-                              cursorColor: Colors.black,
-                              controller: reasonpop,
+                          child: TextField(
+                            decoration: InputDecoration(
+                              fillColor: Colors.black,
+                              hintText: 'Type here',
+                              hintStyle: GoogleFonts.poppins(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w200,
+                                  fontSize:
+                                  MediaQuery.of(context).size.width *
+                                      0.032),
                             ),
+                            keyboardType: TextInputType.text,
+                            cursorColor: Colors.black,
+                            controller: reasonpop,
                           ),
                         ),
                         Row(
@@ -1443,11 +1439,11 @@ class FunkyOverlayAdminRejectState extends State<FunkyOverlayAdminReject>
                                   child: Padding(
                                     padding: EdgeInsets.fromLTRB(
                                         MediaQuery.of(context).size.height *
-                                            0.04,
-                                        12,
+                                            0.0375,
+                                        10,
                                         MediaQuery.of(context).size.height *
-                                            0.04,
-                                        12),
+                                            0.0375,
+                                        10),
                                     child: Text(
                                       'Close',
                                       style: GoogleFonts.lato(
@@ -1498,11 +1494,11 @@ class FunkyOverlayAdminRejectState extends State<FunkyOverlayAdminReject>
                                   child: Padding(
                                     padding: EdgeInsets.fromLTRB(
                                         MediaQuery.of(context).size.height *
-                                            0.04,
-                                        12,
+                                            0.0375,
+                                        10,
                                         MediaQuery.of(context).size.height *
-                                            0.04,
-                                        12),
+                                            0.0375,
+                                        10),
                                     child: Text(
                                       'Done',
                                       style: GoogleFonts.lato(

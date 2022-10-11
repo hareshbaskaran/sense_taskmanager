@@ -835,15 +835,15 @@ class FunkyOverlayacceptdeclineState extends State<FunkyOverlayacceptdecline>
                                         child: Padding(
                                           padding: EdgeInsets.fromLTRB(
                                               MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  0.04,
-                                              12,
+                                                  .size
+                                                  .height *
+                                                  0.0375,
+                                              10,
                                               MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  0.04,
-                                              12),
+                                                  .size
+                                                  .height *
+                                                  0.0375,
+                                              10),
                                           child: Text(
                                             'No',
                                             style: GoogleFonts.lato(
@@ -909,15 +909,15 @@ class FunkyOverlayacceptdeclineState extends State<FunkyOverlayacceptdecline>
                                         child: Padding(
                                           padding: EdgeInsets.fromLTRB(
                                               MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  0.04,
-                                              12,
+                                                  .size
+                                                  .height *
+                                                  0.0375,
+                                              10,
                                               MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  0.04,
-                                              12),
+                                                  .size
+                                                  .height *
+                                                  0.0375,
+                                              10),
                                           child: Text(
                                             'Accept',
                                             style: GoogleFonts.lato(
@@ -946,25 +946,21 @@ class FunkyOverlayacceptdeclineState extends State<FunkyOverlayacceptdecline>
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: Container(
-                                  height: 40,
-                                  child: TextField(
-                                    decoration: InputDecoration(
-                                      fillColor: Colors.black,
-                                      hintText: 'Type the reason to decline',
-                                      hintStyle: GoogleFonts.poppins(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w200,
-                                          fontSize: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.032),
-                                    ),
-                                    keyboardType: TextInputType.text,
-                                    maxLines: 2,
-                                    cursorColor: Colors.black,
-                                    controller: taskreasoncontroller,
+                                child: TextField(
+                                  decoration: InputDecoration(
+                                    fillColor: Colors.black,
+                                    hintText: 'Type the reason to decline',
+                                    hintStyle: GoogleFonts.poppins(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w200,
+                                        fontSize: MediaQuery.of(context)
+                                                .size
+                                                .width *
+                                            0.032),
                                   ),
+                                  keyboardType: TextInputType.text,
+                                  cursorColor: Colors.black,
+                                  controller: taskreasoncontroller,
                                 ),
                               ),
                               Row(
@@ -985,13 +981,13 @@ class FunkyOverlayacceptdeclineState extends State<FunkyOverlayacceptdecline>
                                               MediaQuery.of(context)
                                                       .size
                                                       .height *
-                                                  0.04,
-                                              12,
+                                                  0.0375,
+                                              10,
                                               MediaQuery.of(context)
                                                       .size
                                                       .height *
-                                                  0.04,
-                                              12),
+                                                  0.0375,
+                                              10),
                                           child: Text(
                                             'Close',
                                             style: GoogleFonts.lato(
