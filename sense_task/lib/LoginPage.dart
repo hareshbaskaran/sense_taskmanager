@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -12,15 +10,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
-
-
 List<String> faculty_list = [
   'S.Anand',
   'T.Yuvaraj'
 ];
-int hive_int=0;
 String facultyvalue = "S.Anand";
+String hive_page ="";
 Box<dynamic> Hive_box = Hive.box('myBox');
 bool isButtonDisabled = true;
 User? user;
@@ -38,7 +33,7 @@ TextEditingController passwordvalue_user = new TextEditingController();
 String username_user = usernamevalue_user.text;
 String password_user = passwordvalue_user.text;
 bool grey = true;
-var pageview = 2;
+int pageview = 2;
 final GoogleSignIn googleSignIn = GoogleSignIn();
 bool isLoggedIn = false;
 
@@ -160,10 +155,12 @@ class _loginpageState extends State<loginpage> {
   void getdata()async{
     if(box1.get('user')!=null){
       usernamevalue_user.text = box1.get('user');
-      hive_int=box1.get('page');
       setState(() {
       });
     }
+    pageview=box1.get('page');
+    setState(() {
+    });
   }
   void onLoginStatusChanged(bool isLoggedIn) {
     setState(() {
@@ -185,6 +182,7 @@ class _loginpageState extends State<loginpage> {
   @override
   Widget build(BuildContext context) {
     Hive_box = widget.box;
+
     return Scaffold(
         resizeToAvoidBottomInset: false,
         body: SafeArea(
@@ -613,7 +611,6 @@ class _loginpageState extends State<loginpage> {
           if(pageview==2){
             box1.put('user',usernamevalue_user.text);
             setState(() {
-
             });
           }
           setState(() {
