@@ -224,21 +224,6 @@ class _loginpageState extends State<loginpage> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                FutureBuilder(
-                  future: Authentication.initializeFirebase(context: context),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasError) {
-                      return Text('Error initializing Firebase');
-                    } else if (snapshot.connectionState == ConnectionState.done) {
-                      return Container();
-                    }
-                    return CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        Colors.black
-                      ),
-                    );
-                  },
-                ),
                 Text(
                   textAlign: TextAlign.center,
                   'SENSE TASK\n MANAGEMENT',

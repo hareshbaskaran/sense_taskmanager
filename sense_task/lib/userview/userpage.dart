@@ -1097,30 +1097,26 @@ class FunkyOverlayacceptdeclineState extends State<FunkyOverlayacceptdecline>
                             ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                height: 40,
-                                child: TextField(
-                                  decoration: InputDecoration(
-                                    fillColor: Colors.black,
-                                    hintText: 'Type the reason to decline',
-                                    hintStyle: GoogleFonts.poppins(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.w200,
-                                        fontSize:
-                                            MediaQuery.of(context).size.width *
-                                                0.032),
-                                  ),
-                                  keyboardType: TextInputType.text,
-                                  maxLines: 2,
-                                  cursorColor: Colors.black,
-                                  controller: taskreasoncontroller,
-                                  // onSubmitted: (helo) async {
-                                  //   setState(() {
-                                  //     status = -1;
-                                  //   });
-                                  //   Navigator.pop(context);
-                                  // },
+                              child: TextField(
+                                decoration: InputDecoration(
+                                  fillColor: Colors.black,
+                                  hintText: 'Type the reason to decline',
+                                  hintStyle: GoogleFonts.poppins(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w200,
+                                      fontSize:
+                                          MediaQuery.of(context).size.width *
+                                              0.032),
                                 ),
+                                keyboardType: TextInputType.text,
+                                cursorColor: Colors.black,
+                                controller: taskreasoncontroller,
+                                // onSubmitted: (helo) async {
+                                //   setState(() {
+                                //     status = -1;
+                                //   });
+                                //   Navigator.pop(context);
+                                // },
                               ),
                             ),
                             Spacer(),

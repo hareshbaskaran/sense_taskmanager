@@ -478,13 +478,43 @@ class adminpageState extends State<adminpage> {
                                                                         children: [
                                                                           (document['status'] == 2 && document['reason'] != null)
                                                                               ? Container(
-                                                                                  padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                                                                                  child: Text(
-                                                                                    'Reason : ${document['reason']}',
-                                                                                    textAlign: TextAlign.left,
-                                                                                    style: GoogleFonts.poppins(color: Colors.black, fontWeight: FontWeight.w600, fontSize: MediaQuery.of(context).size.width * 0.035),
+                                                                            padding:EdgeInsets
+                                                                                .fromLTRB(
+                                                                                15,
+                                                                                5,
+                                                                                0,
+                                                                                0),
+                                                                            child: Column(
+                                                                              children: [
+                                                                                Container(
+                                                                                  child:
+                                                                                  Text(
+                                                                                    'Reason :',
+                                                                                    textAlign:
+                                                                                    TextAlign.left,
+                                                                                    style: GoogleFonts.poppins(
+                                                                                        color:
+                                                                                        Colors.black,
+                                                                                        fontWeight: FontWeight.w600,
+                                                                                        fontSize: MediaQuery.of(context).size.width * 0.035),
                                                                                   ),
-                                                                                )
+                                                                                ),
+                                                                                Container(
+                                                                                  child:
+                                                                                  Text(
+                                                                                    '${document['reason']}',
+                                                                                    textAlign:
+                                                                                    TextAlign.left,
+                                                                                    style: GoogleFonts.poppins(
+                                                                                        color:
+                                                                                        Colors.red,
+                                                                                        fontWeight: FontWeight.w600,
+                                                                                        fontSize: MediaQuery.of(context).size.width * 0.035),
+                                                                                  ),
+                                                                                ),
+                                                                              ],
+                                                                            ),
+                                                                          )
                                                                               : (document['status'] == 2 && document['reason'] == null)
                                                                                   ? Container(
                                                                                       padding: EdgeInsets.fromLTRB(10, 5, 0, 0),
@@ -1190,24 +1220,43 @@ class adminpageState extends State<adminpage> {
                                                                               'reason'] !=
                                                                           null)
                                                                   ? Container(
-                                                                      padding: EdgeInsets
-                                                                          .fromLTRB(
-                                                                              15,
-                                                                              5,
-                                                                              0,
-                                                                              0),
-                                                                      child:
+                                                                padding:EdgeInsets
+                                                                  .fromLTRB(
+                                                                  15,
+                                                                  5,
+                                                                  0,
+                                                                  0),
+                                                                    child: Column(
+                                                                      children: [
+                                                                        Container(
+                                                                            child:
+                                                                                Text(
+                                                                                  'Reason :',
+                                                                              textAlign:
+                                                                                  TextAlign.left,
+                                                                              style: GoogleFonts.poppins(
+                                                                                  color:
+                                                                                      Colors.black,
+                                                                                  fontWeight: FontWeight.w600,
+                                                                                  fontSize: MediaQuery.of(context).size.width * 0.035),
+                                                                            ),
+                                                                          ),
+                                                                        Container(
+                                                                          child:
                                                                           Text(
-                                                                        'Reason : ${document['reason']}',
-                                                                        textAlign:
+                                                                            '${document['reason']}',
+                                                                            textAlign:
                                                                             TextAlign.left,
-                                                                        style: GoogleFonts.poppins(
-                                                                            color:
-                                                                                Colors.black,
-                                                                            fontWeight: FontWeight.w600,
-                                                                            fontSize: MediaQuery.of(context).size.width * 0.035),
-                                                                      ),
-                                                                    )
+                                                                            style: GoogleFonts.poppins(
+                                                                                color:
+                                                                                Colors.red,
+                                                                                fontWeight: FontWeight.w600,
+                                                                                fontSize: MediaQuery.of(context).size.width * 0.035),
+                                                                          ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  )
                                                                   : (document['status'] ==
                                                                               2 &&
                                                                           document['reason'] ==
@@ -1367,14 +1416,6 @@ class adminpageState extends State<adminpage> {
                                                                                 0.035),
                                                                   ),
                                                                 ),
-                                                              Container(
-                                                                padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                                                                child: Text(
-                                                                  "${document['admin']}",
-                                                                  textAlign: TextAlign.left,
-                                                                  style: GoogleFonts.poppins(color: Colors.redAccent, fontWeight: FontWeight.w600, fontSize: MediaQuery.of(context).size.width * 0.035),
-                                                                ),
-                                                              ),
                                                             ])
                                                       ]),
                                                 ),
@@ -1564,7 +1605,7 @@ class largetext extends StatelessWidget {
         text,
         textAlign: TextAlign.left,
         style: GoogleFonts.poppins(
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w800,
             color: Colors.black,
             fontSize: MediaQuery.of(context).size.width * 0.04),
       ),
