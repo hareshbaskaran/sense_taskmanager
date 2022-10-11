@@ -201,7 +201,7 @@ class _loginpageState extends State<loginpage> {
                     if (snapshot.hasError) {
                       return Text('Error initializing Firebase');
                     } else if (snapshot.connectionState == ConnectionState.done) {
-                      return _googleSignInButton();
+                      return SizedBox();
                     }
                     return CircularProgressIndicator(
                       valueColor: AlwaysStoppedAnimation<Color>(
@@ -346,20 +346,23 @@ class _loginpageState extends State<loginpage> {
                       ],
                     ),
                   )
-                      : FutureBuilder(
-                    future: Authentication.initializeFirebase(context: context),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasError) {
-                        return Text('Error initializing Firebase');
-                      } else if (snapshot.connectionState == ConnectionState.done) {
-                        return _googleSignInButton();
-                      }
-                      return CircularProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation<Color>(
-                            Colors.black
-                        ),
-                      );
-                    },
+                      : Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child:  FutureBuilder(
+                      future: Authentication.initializeFirebase(context: context),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasError) {
+                          return Text('Error initializing Firebase');
+                        } else if (snapshot.connectionState == ConnectionState.done) {
+                          return _googleSignInButton();
+                        }
+                        return CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                              Colors.black
+                          ),
+                        );
+                      },
+                    ),
                   ),
                   (alertlogin==true&&adminlogin==false)?
                   Padding(
@@ -527,7 +530,24 @@ class _loginpageState extends State<loginpage> {
                   )
                       : Padding(
                     padding: const EdgeInsets.all(20.0),
-                    child: _googleSignInButton(),
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child:  FutureBuilder(
+                        future: Authentication.initializeFirebase(context: context),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasError) {
+                            return Text('Error initializing Firebase');
+                          } else if (snapshot.connectionState == ConnectionState.done) {
+                            return _googleSignInButton();
+                          }
+                          return CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                                Colors.black
+                            ),
+                          );
+                        },
+                      ),
+                    ),
                   ),
                   SizedBox(height: 20),
                   (alertuser==true &&userlogin==false)?
