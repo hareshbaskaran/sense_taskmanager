@@ -19,6 +19,7 @@ List<String> faculty_list = [
   'S.Anand',
   'T.Yuvaraj'
 ];
+int hive_int=0;
 String facultyvalue = "S.Anand";
 Box<dynamic> Hive_box = Hive.box('myBox');
 bool isButtonDisabled = true;
@@ -102,6 +103,7 @@ class _loginpageState extends State<loginpage> {
   void getdata()async{
     if(box1.get('user')!=null){
       usernamevalue_user.text = box1.get('user');
+      hive_int=box1.get('page');
       setState(() {
       });
     }
@@ -516,6 +518,7 @@ class _loginpageState extends State<loginpage> {
           hasInternet = await InternetConnectionChecker().hasConnection;
               User? user =await signInWithGoogle(context: context).then((result) {
                 if(User!=null) {
+                  (pageview==2)?box1.put('page',2):(pageview==1)?box1.put('page',1):box1.put('page',0);
                   Navigator.push(
                     context,
                     MaterialPageRoute(
