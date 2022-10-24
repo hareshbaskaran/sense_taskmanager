@@ -50,7 +50,8 @@ dependencies:
   http: ^0.13.5
   internet_connection_checker: ^1.0.0+1
   flutter_spinkit: ^5.1.0
-
+  flutter_local_notifications: ^5.0.0+4
+  firebase_messaging: ^10.0.4
 
 
 
