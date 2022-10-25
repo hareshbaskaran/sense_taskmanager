@@ -16,14 +16,10 @@ class _NotificationFirebaseState extends State<NotificationFirebase> {
 
   late TextEditingController _textToken;
   late TextEditingController _textSetToken;
-  late TextEditingController _textTitle;
-  late TextEditingController _textBody;
 
   @override
   void dispose() {
     _textToken.dispose();
-    _textTitle.dispose();
-    _textBody.dispose();
     _textSetToken.dispose();
     super.dispose();
   }
@@ -39,8 +35,6 @@ class _NotificationFirebaseState extends State<NotificationFirebase> {
 
     _textToken = TextEditingController();
     _textSetToken = TextEditingController();
-    _textTitle = TextEditingController();
-    _textBody = TextEditingController();
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       RemoteNotification? notification = message.notification;
@@ -62,14 +56,9 @@ class _NotificationFirebaseState extends State<NotificationFirebase> {
   }
 
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Test Notifications'),
-      ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16),
         child: SingleChildScrollView(
@@ -108,93 +97,13 @@ class _NotificationFirebaseState extends State<NotificationFirebase> {
                 child: Text('Get Token'),
               ),
               TextField(
-                controller: _textTitle,
-                decoration: InputDecoration(labelText: "Enter Title"),
-              ),
-              SizedBox(height: 8),
-              TextField(
-                controller: _textBody,
-                decoration: InputDecoration(labelText: "Enter Body"),
-              ),
-              SizedBox(height: 8),
-              TextField(
                 controller: _textSetToken,
                 decoration: InputDecoration(labelText: "Enter Token"),
               ),
               SizedBox(height: 30),
-              Row(
-                children: [
-                  Expanded(
-                    child: TextButton(
-                      onPressed: () {
-                        if (_textSetToken.text.isNotEmpty && check()) {
-                          pushNotificationsSpecificDevice(
-                            title: _textTitle.text,
-                            body: _textBody.text,
-                            token: _textSetToken.text,
-                          );
-                        }
-                      },
-                      child: Text('Send Notification for specific Device'),
-                    ),
-                  ),
-                  SizedBox(width: 8),
-                  Expanded(
-                    child: TextButton(
-                      onPressed: () {
-                        if (check())
-                          pushNotificationsGroupDevice(
-                            title: _textTitle.text,
-                            body: _textBody.text,
-                          );
-                      },
-                      child: Text('Send Notification Group Device'),
-                    ),
-                  ),
-                  SizedBox(width: 8),
-                  Expanded(
-                    child: TextButton(
-                      onPressed: () {
-                        if (check()) {
-                          pushNotificationsAllUsers(
-                            title: _textTitle.text,
-                            body: _textBody.text,
-                          );
-                        }
-                      },
-                      child: Text('Send Notification All Devices'),
-                    ),
-                  ),
-                ],
-              ),
             ],
           ),
         ),
-      ),
-      floatingActionButton: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          FloatingActionButton(
-            onPressed: showNotification,
-            tooltip: 'Increment',
-            child: Icon(Icons.add),
-          ),
-          SizedBox(
-            width: 16,
-          ),
-          FloatingActionButton(
-            onPressed: () async {
-              if (check()) {
-                pushNotificationsAllUsers(
-                  title: _textTitle.text,
-                  body: _textBody.text,
-                );
-              }
-            },
-            tooltip: 'Push Notifications',
-            child: Icon(Icons.send),
-          )
-        ],
       ),
     );
   }
@@ -296,12 +205,5 @@ class _NotificationFirebaseState extends State<NotificationFirebase> {
                 color: Colors.blue,
                 playSound: true,
                 icon: '@mipmap/ic_launcher')));
-  }
-
-  bool check() {
-    if (_textTitle.text.isNotEmpty && _textBody.text.isNotEmpty) {
-      return true;
-    }
-    return false;
   }
 }
